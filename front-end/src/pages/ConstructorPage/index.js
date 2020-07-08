@@ -10,11 +10,28 @@ function Constructor() {
     const [bg, setBg] = React.useState({name: "color2",color:"#fff7b4"});
 
     const sendingObj = {
-        logo: state.logo.logo,
-        nav: state.nav.nav,
-        body: state.body.body,
-        footer: state.footer.footer,
-        style: `mainCont ${bg.name}`
+        meta: {
+          mainContStyle: bg
+        },
+        header: {
+            brandTittle: state.logo.logo.tittle,
+            menuOption1: state.nav.nav.menuOption1,
+            menuOption2: state.nav.nav.menuOption2,
+            menuOption3: state.nav.nav.menuOption3
+        },
+        body: {
+            bodyText1: state.body.body.text1,
+            bodyText2: state.body.body.text2,
+            bodyText3: state.body.body.text3,
+            bodyText4: state.body.body.text4,
+            bodyText5: state.body.body.text5,
+            bodyText6: state.body.body.text6,
+            bodyStyle: state.body.body.style
+        },
+        footer: {
+            address: state.footer.footer.address,
+            contacts: state.footer.footer.contacts,
+        }
     };
 
     const handleSend = (e) => {

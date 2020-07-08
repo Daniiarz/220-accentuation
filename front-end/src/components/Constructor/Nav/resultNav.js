@@ -32,19 +32,9 @@ function ResultNav(onSave) {
 
     const handleClick = () => {
         dispatch(addNav({
-            input1: {
-                text: text1,
-                href: href1
-            },
-            input2: {
-                text: text2,
-                href: href2
-            },
-            input3: {
-                text: text3,
-                href: href3
-            },
-            style: `${onSave.onSave.colorClass} ${onSave.onSave.sizeClass} a`
+            menuOption1: `<a class=\`${onSave.onSave.colorClass} ${onSave.onSave.sizeClass} a\` href=\`${href1}\`>${text1}</a>`,
+            menuOption2: `<a class=\`${onSave.onSave.colorClass} ${onSave.onSave.sizeClass} a\` href=\`${href2}\`>${text2}</a>`,
+            menuOption3: `<a class=\`${onSave.onSave.colorClass} ${onSave.onSave.sizeClass} a\` href=\`${href3}\`>${text3}</a>`
         }));
         dispatch(setReadiness(
             "nav",

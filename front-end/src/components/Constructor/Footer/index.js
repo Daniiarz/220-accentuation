@@ -20,8 +20,8 @@ function Footer() {
 
     const handleClick = () => {
       dispatch(addFooter({
-          text: [address,contacts],
-          style: `${colorClass} ${sizeClass} ${textLayout}`
+          address: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${address}</p>`,
+          contacts: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${contacts}</p>`,
       }));
       dispatch(setReadiness("footer", {
           text: [[address], [contacts]],

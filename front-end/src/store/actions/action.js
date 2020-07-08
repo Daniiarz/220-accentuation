@@ -23,10 +23,17 @@ export const addNav = (data) => ({
     type: 'ADD_NAV',
     data,
 });
+
 export const addBody = (data) => ({
     type: 'ADD_BODY',
     data,
 });
+
+export const setBodyLayout = (layout) => ({
+    type: 'SET_BODY_LAYOUT',
+    layout
+})
+
 export const addFooter = (foot) => ({
     type: 'ADD_FOOTER',
     foot,

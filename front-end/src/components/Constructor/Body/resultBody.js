@@ -2,7 +2,7 @@ import React from "react";
 import style from "./body.module.css";
 import SendBtn from "../../atoms/SendBtn";
 import {useSelector, useDispatch} from "react-redux";
-import {addBody, setReadiness,} from "../../../store/actions/action";
+import {addBody, setReadiness, setBodyLayout} from "../../../store/actions/action";
 
 function ResultBody(onSave) {
     const [textVisibility1, setVisibility1] = React.useState("block");
@@ -66,25 +66,13 @@ function ResultBody(onSave) {
 
     const handleClick = () => {
         dispatch(addBody({
-            input1: {
-                text: text11,
-            },
-            input2: {
-                text: text12,
-            },
-            input3: {
-                text: text21,
-            },
-            input4: {
-                text: text22,
-            },
-            input5: {
-                text: text31,
-            },
-            input6: {
-                text: text32,
-            },
-            style: `${colorClass} ${sizeClass} ${textLayout}`
+            text1: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${text11}</p>`,
+            text2: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${text12}</p>`,
+            text3: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${text21}</p>`,
+            text4: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${text22}</p>`,
+            text5: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${text31}</p>`,
+            text6: `<p class=\`${colorClass} ${sizeClass} ${textLayout}\`>${text32}</p>`,
+            style: `${textLayout}`
         }));
         dispatch(setReadiness(
             "body", {
@@ -109,6 +97,7 @@ function ResultBody(onSave) {
                     : ["r", "m", "m", "r", "r", "m"]
             }
         ));
+        dispatch(setBodyLayout({layout: textLayout}))
     };
 
     return (

@@ -3,6 +3,7 @@ import style from "./constructor.module.css";
 import {NavLink} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {setReadiness} from "../../store/actions/action";
+import body from "../../store/reducers/body";
 
 function Table(onSave) {
     const id = useSelector(state => state.api.id);
@@ -21,6 +22,8 @@ function Table(onSave) {
     ];
 
     const readiness = useSelector(state => state.readiness);
+    const bodyLayout = useSelector(state => state);
+
     return (
         <div className={style.tableCont}>
             <div className={style.table}>
@@ -40,7 +43,10 @@ function Table(onSave) {
                                         <div onClick={e => handleAlert(e, el.area)}
                                              className={style[el.area]}>
                                             {readiness[el.area].text.map((input, index) => (
-                                                <div className={style[`${el.area}-cont`]} key={index}>
+                                                <div
+                                                    // style={bo}
+                                                    className={style[`${el.area}-cont`]}
+                                                    key={index}>
                                                     {
                                                         input.map((spring, index) => (
                                                             <p  key={index}

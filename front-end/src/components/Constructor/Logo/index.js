@@ -17,8 +17,7 @@ function Logo() {
 
     const handleClick = () => {
         dispatch(addLogo({
-            input1: {text: text},
-            style: `${styleColor} ${styleSize} ${styleLayout}`}));
+            tittle: `<p class=\`${styleColor} ${styleSize} ${styleLayout}\`>${text}</p>`}));
         dispatch(setReadiness(
             "logo",
             {

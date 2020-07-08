@@ -1,5 +1,6 @@
 const initialState = {
     body: {},
+    bodyLayout: {}
 };
 
 export default (state = initialState, action) => {
@@ -8,6 +9,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 body: action.data,
+            };
+        case 'SET_BODY_LAYOUT':
+            return {
+                ...state,
+                bodyLayout: action.layout,
             };
         default:
             return state
