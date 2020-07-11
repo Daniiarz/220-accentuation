@@ -1,9 +1,13 @@
-from .models import Site
-from django.views.generic import DetailView
+from rest_framework.generics import GenericAPIView
 
-# Create your views here.
+from .serializers import SiteSerializer
 
 
-class SiteView(DetailView):
-    template_name = "index.html"
-    model = Site
+class CreateSiteView(GenericAPIView):
+    serializer_class = SiteSerializer
+
+    def post(self, request, *args, **kwargs):
+        """
+        Create new nginx config and static files for site
+        """
+        pass

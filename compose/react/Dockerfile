@@ -15,6 +15,6 @@ COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
 EXPOSE 80
 
-COPY ./conf/front-end.conf /etc/nginx/conf.d/default.conf
+COPY ./conf/nginx/front-end.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
