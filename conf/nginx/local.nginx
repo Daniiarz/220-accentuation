@@ -4,7 +4,7 @@ upstream api {
 
 server {
   listen 80;
-  server_name course-app.xyz;
+  server_name 220-accentuation.co;
   server_tokens on;
 
   location / {
@@ -33,7 +33,7 @@ server {
 
 server {
   listen 80;
-  server_name grayslace.course-app.xyz;
+  server_name grayslace.220-accentuation.co;
   server_tokens on;
 
     location / {
@@ -52,7 +52,7 @@ server {
 
 server {
   listen 80;
-  server_name freelancer.course-app.xyz;
+  server_name freelancer.220-accentuation.co;
   server_tokens on;
 
     location / {
