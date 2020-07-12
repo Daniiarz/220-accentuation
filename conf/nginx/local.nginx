@@ -2,10 +2,19 @@ upstream api {
   server backend:8000;
 }
 
+upstream sites {
+  server nginx-sites:80;
+}
+
+
 server {
   listen 80;
   server_name 220-accentuation.co;
   server_tokens on;
+
+  location / {
+    proxy_pass http://sites;
+  }
 
   location / {
     proxy_set_header Host $http_host;
@@ -29,42 +38,4 @@ server {
     autoindex on;
     alias /usr/static/;
   }
-}
-
-server {
-  listen 80;
-  server_name grayslace.220-accentuation.co;
-  server_tokens on;
-
-    location / {
-    root   /usr/scr/sites/grayscale;
-    index  index.html index.htm;
-
-    try_files $uri /index.html;
-  }
-
-  error_page   500 502 503 504  /50x.html;
-  location = /50x.html {
-    root   /usr/share/nginx/html;
-  }
-
-}
-
-server {
-  listen 80;
-  server_name freelancer.220-accentuation.co;
-  server_tokens on;
-
-    location / {
-    root   /usr/scr/sites/freelancer;
-    index  index.html index.htm;
-
-    try_files $uri /index.html;
-  }
-
-  error_page   500 502 503 504  /50x.html;
-  location = /50x.html {
-    root   /usr/share/nginx/html;
-  }
-
 }
