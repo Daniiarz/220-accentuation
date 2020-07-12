@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 
 class Site(models.Model):
@@ -8,7 +7,7 @@ class Site(models.Model):
     """
     name = models.CharField(max_length=150)
 
-    created = models.DateTimeField(default=timezone.now())
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
