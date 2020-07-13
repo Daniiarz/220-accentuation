@@ -2,6 +2,7 @@ from . import views
 from django.urls import path
 
 
-# urlpatterns = [
-#     path("<slug:slug>/", views.SiteView.as_view(), name="sites")
-# ]
+urlpatterns = [
+    path("", views.ConstructorView.as_view(), name="constructor"),
+    path("checkTitle/", views.check_titles, name="check-titles")
+]

@@ -4,3 +4,5 @@ python-decouple==3.1
 psycopg2==2.8.5
 Pillow==7.2.0
 beautifulsoup4==4.9.1
+python-digitalocean==1.15.0
+docker==4.2.2
