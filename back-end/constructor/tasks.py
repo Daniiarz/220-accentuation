@@ -54,7 +54,7 @@ def create_static_site(validated_data, title, template_name):
     # Stack overflow code
     slug_title = slugify(title.lower())
 
-    root_src_dir = rf'/usr/src/templates/{template_name}'  # Path/Location of the source directory
+    root_src_dir = rf'/usr/src/backend/templates/{template_name}'  # Path/Location of the source directory
     root_dst_dir = fr'/usr/src/sites/{slug_title}'  # Path to the destination folder
 
     for src_dir, dirs, files in os.walk(root_src_dir):
