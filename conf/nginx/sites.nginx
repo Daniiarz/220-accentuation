@@ -1,3 +1,1 @@
-http {
- include sites_conf/*.nginx;
-}
+include sites_conf/*.nginx;

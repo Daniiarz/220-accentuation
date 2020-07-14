@@ -20,7 +20,7 @@ services:
       - media:/usr/src/backend/media/
       - static:/usr/src/backend/static/
       - ./back-end/:/usr/src/backend/
-      - ./sites_conf/:/usr/scr/sites_conf/
+      - ./sites/:/usr/scr/sites/
     command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
@@ -40,8 +40,8 @@ services:
 
   sites-nginx:
     volumes:
-      - ./conf/nginx/sites_conf.nginx:/etc/nginx/conf.d/default.conf
-      - ./sites_conf/:/usr/scr/sites_conf/
+      - ./conf/nginx/sites.nginx:/etc/nginx/conf.d/default.conf
+      - ./sites/:/usr/scr/sites/
     image: nginx:1.17.9-alpine
     depends_on:
       - backend
