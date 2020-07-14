@@ -2,14 +2,14 @@ upstream api {
   server backend:8000;
 }
 
-upstream sites {
+upstream sites_conf {
   server sites-nginx:80;
 }
 
 server {
   listen 80 default_server;
   listen [::]:80 default_server;
-  server_name www.220-accentuation.co www.220-accentuation.co;
+  server_name 220-accentuation.co www.220-accentuation.co;
   server_tokens on;
 
   location / {

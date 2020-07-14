@@ -3,5 +3,8 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/back-end/constructor/migrations/0002_auto_20200712_1536.py" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Pipenv (accentuation_220)" project-jdk-type="Python SDK" />
 </project>
