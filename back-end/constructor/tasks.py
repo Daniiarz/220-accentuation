@@ -4,6 +4,7 @@ import shutil
 import digitalocean
 import docker
 from bs4 import BeautifulSoup
+from celery import shared_task
 from decouple import config
 from django.utils.text import slugify
 
@@ -16,23 +17,22 @@ NAME = config("DO_NAME")
 
 def create_domain_record(title: str):
     domain = digitalocean.Domain(token=TOKEN, name=NAME)
-    slug_title = slugify(title.lower())
     new_record = domain.create_new_domain_record(
         type='A',
-        name=slug_title,
+        name=title,
         data=DATA
     )
 
-    with open(f"usr/scr/sites/{title}/sites.nginx", "a") as sites_conf:
+    with open(f"/usr/src/conf/sites.nginx", "a") as sites_conf:
         configuration = \
             f"""
 server {{
     listen 80;
-    server_name {slug_title}.220-accentuation.co;
+    server_name {title}.220-accentuation.co;
     server_tokens on;
     
     location / {{
-        root   /usr/scr/sites/freelancer;
+        root   /usr/scr/sites/{title};
         index  index.html index.htm;
         try_files $uri /index.html;
     }}
@@ -49,10 +49,13 @@ server {{
     site.save()
 
 
-def create_static_site(validated_data, title):
+@shared_task
+def create_static_site(validated_data, title, template_name):
     # Stack overflow code
-    root_src_dir = r'usr/src/backend/templates/grayscale'  # Path/Location of the source directory
-    root_dst_dir = fr'usr/scr/sites/{title}'  # Path to the destination folder
+    slug_title = slugify(title.lower())
+
+    root_src_dir = rf'/usr/src/templates/{template_name}'  # Path/Location of the source directory
+    root_dst_dir = fr'/usr/src/sites/{slug_title}'  # Path to the destination folder
 
     for src_dir, dirs, files in os.walk(root_src_dir):
         dst_dir = src_dir.replace(root_src_dir, root_dst_dir, 1)
@@ -65,18 +68,22 @@ def create_static_site(validated_data, title):
                 os.remove(dst_file)
             shutil.copy(src_file, dst_dir)
 
-    with open(fr'usr\scr\sites\{title}\index.html') as inf:
+    with open(f'{root_dst_dir}/index.html') as inf:
         txt = inf.read()
-        soup = BeautifulSoup(txt)
+        soup = BeautifulSoup(txt, features="html.parser")
 
     for key, value in validated_data.items():
         soup.find(id=key).string = value
 
+    print("Edited configuration")
     # save the file again
-    with open("existing_file.html", "w") as outf:
+    with open(f'{root_dst_dir}/index.html', "w") as outf:
         outf.write(str(soup))
 
-    client = docker.from_env()
+    create_domain_record(slug_title)
+
+    client = docker.DockerClient(base_url='unix://usr/src/run/docker.sock')
     container = client.containers.get("accentuation_220_sites-nginx_1")
 
     container.restart(timeout=0)
+

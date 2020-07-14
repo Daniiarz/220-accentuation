@@ -135,3 +135,9 @@ STATIC_ROOT = "static"
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = "media"
+
+# Celery
+
+CELERY_BROKER_URL = config("BROKER_URL")
+
+CELERY_TIMEZONE = 'Asia/Bishkek'

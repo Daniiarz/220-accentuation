@@ -1,8 +1,7 @@
-from django.db import IntegrityError
 from rest_framework import serializers
 
 from .models import Site
-from .tasks import create_domain_record, create_static_site
+from .tasks import create_static_site
 
 
 class GrayscaleSerializer(serializers.Serializer):
@@ -22,15 +21,11 @@ class GrayscaleSerializer(serializers.Serializer):
     homeText = serializers.CharField()
     phone = serializers.CharField()
 
-    def create_site(self, validated_data):
-        title = validated_data.pop("title").lower()
-        sites = Site.objects.get(name=title)
-
+    def create(self, **kwargs):
+        validated_data = self.validated_data
+        title = validated_data["brandText"].lower()
+        sites = Site.objects.filter(name=title)
         if sites.exists():
-            raise IntegrityError("Site with this name is already exists!")
+            raise ValueError("This domain is already taken, and why do you know this endpoint?")
 
-        # Execute creation of domain name
-        create_domain_record(title)
-
-        # Execute creation of static site
-        create_static_site(validated_data, title)
+        create_static_site.delay(validated_data, title, "grayscale")

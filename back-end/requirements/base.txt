@@ -6,3 +6,4 @@ Pillow==7.2.0
 beautifulsoup4==4.9.1
 python-digitalocean==1.15.0
 docker==4.2.2
+celery==4.4.6

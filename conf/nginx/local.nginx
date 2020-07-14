@@ -9,7 +9,8 @@ upstream sites {
 server {
   listen 80 default_server;
   listen [::]:80 default_server;
-  server_name 220-accentuation.co www.220-accentuation.co;
+  server_name localhost;
+#  server_name 220-accentuation.co www.220-accentuation.co;
   server_tokens on;
 
   location / {

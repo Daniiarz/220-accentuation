@@ -17,7 +17,7 @@ class ConstructorView(GenericAPIView):
         """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.create_site()
+        serializer.create()
         headers = self.get_success_headers(serializer.data)
 
         return Response({
@@ -36,9 +36,8 @@ class ConstructorView(GenericAPIView):
 @api_view(['POST'])
 def check_titles(request):
     title = request.data["title"]
-
-    site = Site.objects.get(name=title)
-    if site.exists():
+    try:
+        Site.objects.get(name=title)
         return Response({"message": "This domain is already been taken"}, status=status.HTTP_400_BAD_REQUEST)
-
-    return Response({"message": "This domain is free"}, status=status.HTTP_200_OK)
+    except Site.DoesNotExist:
+        return Response({"message": "This domain is free"}, status=status.HTTP_200_OK)

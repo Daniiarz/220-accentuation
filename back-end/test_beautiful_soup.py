@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-title = "it-academy"
+title = "h"
 
 validated_data = {"aboutDesc1": "<p class=\"text-black-50 mb-0\">asdasdas sdasd asdasda</p>",
 
@@ -18,15 +18,13 @@ validated_data = {"aboutDesc1": "<p class=\"text-black-50 mb-0\">asdasdas sdasd 
                   "phone": "<div class=\"small text-black-50\">+9997123215</div>",
                   }
 
-with open(fr'/home/daniiar/Desktop/accentuation_220/sites/{title}/index.html') as inf:
+with open(fr'/usr/src/sites/{title}/index.html') as inf:
     txt = inf.read()
     soup = BeautifulSoup(txt, features="html.parser")
 
 for key, value in validated_data.items():
-    tag = soup.find(id=key)
-    new_tag = soup.new_tag(value)
-    tag.replace_with(new_tag)
+    soup.find(id=key).string = value
 
 # save the file again
-with open(fr'/home/daniiar/Desktop/accentuation_220/sites/{title}/index.html', "w") as outf:
+with open(fr'/usr/src/sites/{title}/index.html', "w") as outf:
     outf.write(str(soup))

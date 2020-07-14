@@ -19,8 +19,12 @@ services:
     volumes:
       - media:/usr/src/backend/media/
       - static:/usr/src/backend/static/
+      # Sites
+      - ./sites/:/usr/src/sites/
+      # Templates
+      - ./back-end/templates/:/usr/src/templates/
+      # For local development only
       - ./back-end/:/usr/src/backend/
-      - ./sites/:/usr/scr/sites/
     command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
@@ -28,9 +32,9 @@ services:
 
   nginx:
     volumes:
-      - ./conf/nginx/local.nginx:/etc/nginx/conf.d/default.conf
       - media:/usr/media/:ro
       - static:/usr/static/:ro
+      - ./conf/nginx/local.nginx:/etc/nginx/conf.d/default.conf
     image: nginx:1.17.9-alpine
     ports:
       - 80:80
@@ -41,11 +45,29 @@ services:
   sites-nginx:
     volumes:
       - ./conf/nginx/sites.nginx:/etc/nginx/conf.d/default.conf
-      - ./sites/:/usr/scr/sites/
+      - ./sites/:/usr/src/sites/
     image: nginx:1.17.9-alpine
     depends_on:
       - backend
 
+  rabbitmq:
+    image: rabbitmq:3.8.3-alpine
+    restart: always
+
+  celery-worker:
+    <<: *backend
+    image: celery-worker
+    command: ["celery", "worker", "-A", "accentuation_220", "--loglevel", "INFO"]
+    ports: []
+    volumes:
+      - /run/:/usr/src/run/
+      - ./sites/:/usr/src/sites/
+      - ./conf/nginx/:/usr/src/conf/
+      - ./back-end/templates/:/usr/src/templates/
+      - ./back-end/:/usr/src/backend/
+    depends_on:
+      - rabbitmq
+      - db
 
 volumes:
   accentuation_data:
