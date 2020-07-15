@@ -18,7 +18,7 @@ class TemplatesView(ListAPIView):
 
 class ConstructorView(GenericAPIView):
     def get_serializer_class(self):
-        if self.request.data["templateName"].lower() == "grayscale":
+        if self.request.POST.get("templateName", "").lower() == "grayscale":
             self.serializer_class = GrayscaleSerializer
 
     def post(self, request, *args, **kwargs):
