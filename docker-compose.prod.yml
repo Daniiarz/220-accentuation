@@ -20,7 +20,7 @@ services:
       - static:/usr/src/backend/static/
     command: sh -c "python manage.py migrate &&
                     python manage.py collectstatic --no-input &&
-                    gunicorn -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 -w 4 --log-level info sisters_sweets.asgi:application
+                    gunicorn -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 -w 4 --log-level info accentuation_220.asgi:application
                     "
     depends_on:
       - db

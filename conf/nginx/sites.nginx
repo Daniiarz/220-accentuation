@@ -19,7 +19,7 @@ server {
 
 server {
   listen 80;
-  server_name grayslace.220-accentuation.co;
+  server_name grayscale.220-accentuation.co;
   server_tokens on;
 
     location / {
