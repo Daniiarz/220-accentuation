@@ -9,8 +9,8 @@ upstream sites {
 server {
   listen 80 default_server;
   listen [::]:80 default_server;
-  server_name localhost;
-#  server_name 220-accentuation.co www.220-accentuation.co;
+#  server_name localhost;
+  server_name 220-accentuation.co www.220-accentuation.co;
   server_tokens on;
 
   location / {
@@ -27,12 +27,14 @@ server {
 
   location /media/ {
     autoindex on;
+    sendfile on;
     alias /usr/media/;
   }
 
   location /static/ {
     # Nginx won't list all aviable files in that directory
     autoindex on;
+    sendfile on;
     alias /usr/static/;
   }
 }
