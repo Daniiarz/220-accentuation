@@ -1,15 +1,25 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from .serializers import GrayscaleSerializer
-from .models import Site
+from .serializers import GrayscaleSerializer, TemplateSerializer
+from .models import Site, Template
+
+
+class TemplatesView(ListAPIView):
+    """
+    Listing all available templates
+    """
+    serializer_class = TemplateSerializer
+    queryset = Template.objects.all()
 
 
 class ConstructorView(GenericAPIView):
-    serializer_class = GrayscaleSerializer
+    def get_serializer_class(self):
+        if self.request.data["templateName"].lower() == "grayscale":
+            self.serializer_class = GrayscaleSerializer
 
     def post(self, request, *args, **kwargs):
         """

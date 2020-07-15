@@ -1,7 +1,17 @@
 from rest_framework import serializers
 
-from .models import Site
+from .models import Site, Template
 from .tasks import create_static_site
+
+
+class TemplateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Template
+        fields = [
+            "name",
+            "link",
+            "img"
+        ]
 
 
 class GrayscaleSerializer(serializers.Serializer):

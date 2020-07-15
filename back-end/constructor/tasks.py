@@ -32,7 +32,7 @@ server {{
     server_tokens on;
     
     location / {{
-        root   /usr/scr/sites/{title};
+        root   /usr/src/sites/{title};
         index  index.html index.htm;
         try_files $uri /index.html;
     }}
@@ -75,7 +75,6 @@ def create_static_site(validated_data, title, template_name):
     for key, value in validated_data.items():
         soup.find(id=key).string = value
 
-    print("Edited configuration")
     # save the file again
     with open(f'{root_dst_dir}/index.html', "w") as outf:
         outf.write(str(soup))

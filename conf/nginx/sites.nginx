@@ -4,7 +4,7 @@ server {
   server_tokens on;
 
     location / {
-    root   /usr/scr/sites/freelancer;
+    root   /usr/src/sites/freelancer;
     index  index.html index.htm;
 
     try_files $uri /index.html;
@@ -23,7 +23,7 @@ server {
   server_tokens on;
 
     location / {
-    root   /usr/scr/sites/grayscale;
+    root   /usr/src/sites/grayscale;
     index  index.html index.htm;
 
     try_files $uri /index.html;
