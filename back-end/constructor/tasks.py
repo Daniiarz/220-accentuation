@@ -82,7 +82,7 @@ def create_static_site(validated_data, title, template_name):
     create_domain_record(slug_title)
 
     client = docker.DockerClient(base_url='unix://usr/src/run/docker.sock')
-    container = client.containers.get("accentuation_220_sites-nginx_1")
+    container = client.containers.get("220-accentuation_sites-nginx_1")
 
     container.restart(timeout=0)
 
