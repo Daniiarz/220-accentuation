@@ -16,31 +16,38 @@ class TemplatesView(ListAPIView):
     queryset = Template.objects.all()
 
 
-class ConstructorView(GenericAPIView):
-    def get_serializer_class(self):
-        if self.request.POST.get("templateName", "").lower() == "grayscale":
-            self.serializer_class = GrayscaleSerializer
-
-    def post(self, request, *args, **kwargs):
-        """
-        Create new nginx config and static files for site
-        """
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.create()
-        headers = self.get_success_headers(serializer.data)
-
-        return Response({
-            "message": "site created successfully"},
-            status=status.HTTP_201_CREATED,
-            headers=headers
+@api_view(['POST'])
+def constructor_view(request):
+    if request.POST.get("templateName").lower() == "grayscale":
+        serializer_class = GrayscaleSerializer
+    else:
+        return Response(
+            {"message": "No such templates exists!"}
         )
 
-    def get_success_headers(self, data):
-        try:
-            return {'Location': str(data[api_settings.URL_FIELD_NAME])}
-        except (TypeError, KeyError):
-            return {}
+    serializer = serializer_class(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.create()
+
+    return Response({
+        "message": "site created successfully"},
+        status=status.HTTP_201_CREATED,
+    )
+
+
+# class ConstructorView(GenericAPIView):
+#     def post(self, request, *args, **kwargs):
+#         """
+#         Create new nginx config and static files for site
+#         """
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.create()
+#
+#         return Response({
+#             "message": "site created successfully"},
+#             status=status.HTTP_201_CREATED,
+#         )
 
 
 @api_view(['POST'])
