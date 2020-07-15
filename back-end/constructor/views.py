@@ -18,7 +18,8 @@ class TemplatesView(ListAPIView):
 
 @api_view(['POST'])
 def constructor_view(request):
-    if request.POST.get("templateName").lower() == "grayscale":
+    template_name = request.POST.get("templateName", "")
+    if template_name.lower() == "grayscale":
         serializer_class = GrayscaleSerializer
     else:
         return Response(
