@@ -31,7 +31,7 @@ server {
     alias /usr/media/;
   }
 
-  location /static/ {
+  location /back-static/ {
     # Nginx won't list all aviable files in that directory
     autoindex on;
     sendfile on;

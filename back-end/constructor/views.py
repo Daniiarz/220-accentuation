@@ -45,7 +45,7 @@ class ConstructorView(GenericAPIView):
 
 @api_view(['POST'])
 def check_titles(request):
-    title = request.data["title"]
+    title = request.POST.get("title", "")
     try:
         Site.objects.get(name=title)
         return Response({"message": "This domain is already been taken"}, status=status.HTTP_400_BAD_REQUEST)
