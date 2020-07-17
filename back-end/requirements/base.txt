@@ -7,3 +7,4 @@ beautifulsoup4==4.9.1
 python-digitalocean==1.15.0
 docker==4.2.2
 celery==4.4.6
+django-rest-auth[with_social]==0.9.5

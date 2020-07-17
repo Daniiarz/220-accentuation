@@ -59,6 +59,7 @@ services:
       - /run/:/usr/src/run/
       - ./sites/:/usr/src/sites/
       - ./conf/nginx/:/usr/src/conf/
+      - ./back-end/:/usr/src/backend/
     depends_on:
       - rabbitmq
       - db

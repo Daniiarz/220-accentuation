@@ -2,54 +2,23 @@ upstream api {
   server backend:8000;
 }
 
-upstream front {
-  server front-end:80;
+upstream sites {
+  server sites-nginx:80;
 }
 
 server {
-  listen 80;
-  listen [::]:80;
-
-  server_name  sweets.kg www.sweets.kg;
-
-  server_tokens off;
-
-  return 301 https://www.sweets.kg$request_uri;
-
+  listen 80 default_server;
+  return 444;
 }
 
 server {
-  listen 443 ssl http2;
-  listen [::]:443 ssl http2 ipv6only=on;
+  listen 80 deferred;
+  listen [::]:80 deferred;
+  server_name localhost;
+#  server_name 220-accentuation.co www.220-accentuation.co;
+  server_tokens on;
 
-  server_name www.sweets.kg sweets.kg;
-
-  server_tokens off;
-
-  ssl_certificate /usr/letsencrypt/fullchain.pem;
-  ssl_certificate_key /usr/letsencrypt/privkey.pem;
-
-  ssl_dhparam /usr/dhparam/dhparam-2048.pem;
-
-  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
-  add_header X-XSS-Protection "1; mode=block" always;
-  add_header X-Content-Type-Options "nosniff" always;
-  add_header X-Frame-Options "SAMEORIGIN" always;
-
-  add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-
-  ssl_session_cache shared:SSL:10m;
-  ssl_session_timeout 10m;
-
-  ssl_protocols TLSv1.2 TLSv1.3;
-  ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
-  ssl_prefer_server_ciphers off;
-
-  ssl_stapling on;
-  ssl_stapling_verify on;
-  ssl_trusted_certificate /usr/letsencrypt/fullchain.pem;
-
-  location ~ ^/(api|summernote|admin) {
+  location / {
     proxy_set_header Host $http_host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
@@ -62,20 +31,27 @@ server {
   }
 
   location /media/ {
-    autoindex off;
+    autoindex on;
     sendfile on;
     alias /usr/media/;
   }
 
   location /back-static/ {
     # Nginx won't list all aviable files in that directory
-    autoindex off;
+    autoindex on;
     sendfile on;
     alias /usr/static/;
   }
+}
+
+server {
+  listen 80;
+  listen [::]:80;
+  server_name *.220-accentuation.co;
+  server_tokens on;
 
   location / {
-    proxy_pass http://front;
+    proxy_pass http://sites;
   }
-
 }
+

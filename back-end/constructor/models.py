@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -7,6 +8,8 @@ class Site(models.Model):
     """
     name = models.CharField(max_length=150, unique=True)
     subdomain_id = models.IntegerField()
+    creator = models.ForeignKey(get_user_model(),
+                                on_delete=models.CASCADE, related_name="sites", null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

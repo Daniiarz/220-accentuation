@@ -4,14 +4,23 @@ from .models import Site, Template
 from .tasks import create_static_site
 
 
+class SiteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Site
+        fields = (
+            "name",
+            "created"
+        )
+
+
 class TemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Template
-        fields = [
+        fields = (
             "name",
             "link",
             "img"
-        ]
+        )
 
 
 class GrayscaleSerializer(serializers.Serializer):
@@ -38,4 +47,4 @@ class GrayscaleSerializer(serializers.Serializer):
         if sites.exists():
             raise ValueError("This domain is already taken, and why do you know this endpoint?")
 
-        create_static_site.delay(validated_data, title, "grayscale")
+        create_static_site.delay(validated_data, title, "grayscale", kwargs["user_id"])

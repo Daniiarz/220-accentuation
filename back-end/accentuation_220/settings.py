@@ -38,10 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     "constructor",
+    "users",
 
     "rest_framework",
+    'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -141,3 +145,11 @@ MEDIA_ROOT = "media"
 CELERY_BROKER_URL = config("BROKER_URL")
 
 CELERY_TIMEZONE = 'Asia/Bishkek'
+
+# Authentication
+
+AUTH_USER_MODEL = "users.User"
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

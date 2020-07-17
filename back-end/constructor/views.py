@@ -1,11 +1,13 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
 from .serializers import GrayscaleSerializer, TemplateSerializer
 from .models import Site, Template
+from .permissions import MaxAmountNotExceeded
 
 
 class TemplatesView(ListAPIView):
@@ -16,28 +18,9 @@ class TemplatesView(ListAPIView):
     queryset = Template.objects.all()
 
 
-# @api_view(['POST'])
-# def constructor_view(request):
-#     template_name = request.POST.get("templateName", "")
-#     # if template_name.lower() == "grayscale":
-#     #     serializer_class = GrayscaleSerializer
-#     # else:
-#     #     return Response({
-#     #         "message": "No such templates exists!"},
-#     #         status=status.HTTP_400_BAD_REQUEST
-#     #     )
-#     serializer_class = GrayscaleSerializer
-#     serializer = serializer_class(data=request.data)
-#     serializer.is_valid(raise_exception=True)
-#     serializer.create()
-#
-#     return Response({
-#         "message": "site created successfully"},
-#         status=status.HTTP_201_CREATED,
-#     )
-
 class ConstructorView(GenericAPIView):
     serializer_class = GrayscaleSerializer
+    permission_classes = [permissions.IsAuthenticated, MaxAmountNotExceeded]
 
     def post(self, request, *args, **kwargs):
         """
@@ -45,7 +28,7 @@ class ConstructorView(GenericAPIView):
         """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.create()
+        serializer.create(user_id=request.user.id)
         headers = self.get_success_headers(serializer.data)
 
         return Response({
@@ -62,8 +45,9 @@ class ConstructorView(GenericAPIView):
 
 
 @api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
 def check_titles(request):
-    title = request.POST.get("title", "")
+    title = request.data.get("title")
     try:
         Site.objects.get(name=title)
         return Response({"message": "This domain is already been taken"}, status=status.HTTP_400_BAD_REQUEST)

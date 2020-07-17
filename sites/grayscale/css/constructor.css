@@ -1,0 +1,523 @@
+.page-content{
+}
+
+#brandText{
+    background: none;
+    outline: none;
+    border: none;
+    padding: 5px 15px !important;
+}
+#brandText:focus{
+    border: 1px solid var(--orange);
+}
+
+#brandText::placeholder{
+    color: inherit;
+    font-size: inherit;
+    opacity: 1;
+}
+
+#homeText{
+    width: 700px;
+    font-size: 50px;
+    letter-spacing: 0.8rem;
+    word-wrap: break-word;
+    text-align: center;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 2.5rem;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    background-clip: border-box;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text
+}
+#homeText::placeholder{
+    color: inherit;
+    opacity: 1;
+}
+
+#homeText:focus{
+    border: 2px solid var(--orange);
+}
+
+
+@media(max-width: 756px) {
+    #homeText{
+        width: 560px;
+        font-size: 40px;
+        padding: 0 10px;
+    }
+    #brandText{
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 16px;
+    }
+}
+@media(max-width: 568px) {
+    #homeText{
+        width: 320px;
+        font-size: 24px;
+        padding: 0 10px;
+    }
+}
+
+#homeDesc{
+    max-width: 30rem;
+    font-size: 1.25rem;
+    word-wrap: break-word;
+    text-align: center;
+    outline: none;
+    border: none;
+    background: none;
+    background-clip: border-box;
+    padding: 10px 15px;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+#homeDesc:focus{
+    border: 1px solid var(--orange);
+}
+
+.about-mini-cont{
+    min-height: 300px;
+    background: #fff;
+}
+
+#aboutText1, #aboutText2, #aboutText3{
+    width: 99%;
+    text-align: inherit;
+    font-size: 1.5rem;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    background: none;
+}
+
+#aboutText1:focus, #aboutText2:focus, #aboutText3:focus{
+    border: 1px solid var(--orange);
+}
+
+#aboutDesc1{
+    width: 99%;
+    max-height: 150px;
+    font-size: 90%;
+    color: rgba(0, 0, 0, 0.5) !important;
+    letter-spacing: 0.0625em;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    background: none;
+}
+#aboutDesc2, #aboutDesc3{
+    width: 99%;
+    text-align: inherit;
+    max-height: 150px;
+    letter-spacing: 0.0625em;
+    font-size: 90%;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    background: none;
+}
+
+#aboutDesc1:focus, #aboutDesc2:focus, #aboutDesc3:focus{
+    border: 1px solid var(--orange);
+}
+
+.uploaderLabel{
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 24px;
+}
+.uploaderLabel:hover{
+    color: var(--orange);
+}
+
+.uploader{
+    width: 50px;
+    height: 50px;
+}
+
+#aboutImage1{
+    position: absolute;
+    min-width: 100%;
+    height: 100%;
+    /*display: none;*/
+}
+
+#address, #phone, #email{
+    width: 100%;
+    letter-spacing: 0.0625em;
+    font-size: 90%;
+    outline: none;
+    text-align: center;
+}
+
+.send-cont{
+    height: 50px;
+    width: 150px;
+    position: fixed;
+    transform: rotate(-300grad);
+    align-items: center;
+    left: -45px;
+    top: 50%;
+    bottom: 50%;
+    transition: .1s ease-in-out;
+}
+
+
+#send-btn{
+    height: 40px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    font-family: inherit;
+    background: 0;
+    color: var(--light);
+    transition: .1s ease-in-out;
+    font-size: 18px;
+    border: none;
+    outline: none;
+}
+#send-btn:hover{
+    color: var(--black);
+    background: var(--orange);
+}
+
+@media(max-width: 768px){
+    .send-cont{
+        height: 20px;
+        width: 150px;
+        position: fixed;
+        transform: rotate(-300grad);
+        align-items: center;
+        left: -65px;
+        top: 50%;
+        bottom: 50%;
+        transition: .1s ease-in-out;
+    }
+
+    #send-btn{
+        height: 20px;
+        width: 120px;
+        background: var(--secondary);
+        font-size: 14px;
+    }
+    #modalWin{
+        width: 250px;
+        height: 50px;
+        top: 15%;
+        left: -300px;
+        grid-column-gap: 50px;
+    }
+}
+
+#modalWin{
+    width: 300px;
+    height: 80px;
+    position: fixed;
+    top: 10%;
+    left: -400px;
+    color: var(--light);
+    font-size: 20px;
+    display: grid;
+    grid-template: 1fr / 200px 20px;
+    grid-column-gap: 50px;
+    justify-content: center;
+    background: var(--danger);
+    transition: .5s ease-in-out;
+}
+#modalWin p{
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+}
+#modalWin button{
+    width: 20px;
+    height: 20px;
+    background: 0;
+    border: none;
+    outline: none;
+    color: white;
+    margin: 0;
+}
+
+#modalCont{
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalBody{
+    position: relative;
+    height: 40%;
+    width: 50%;
+    background: var(--light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.closeBodyContBtnCont{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.closeBodyContBtn{
+    grid-area: btn;
+    width: 50px;
+    height: 50px;
+    color: var(--light);
+}
+
+.brandTextOfModalBody{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+}
+
+.modalRewriteCont{
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.modalRewriteInput{
+    width: 40%;
+    font-size: 22px;
+    font-family: inherit;
+}
+
+.modalRewriteCheckBtn{
+    width: 10%;
+    height: 35px;
+    border: none;
+    background: var(--light);
+    font-family: inherit;
+    color: var(--blue);
+    outline: none;
+}
+.modalRewriteCheckBtn:hover{
+    background: var(--blue);
+    color: var(--light);
+}
+
+.modalRewriteErrorMessage{
+    margin: 0 0 0 10px;
+    font-family: inherit;
+    font-size: 22px;
+    color: var(--danger);
+}
+
+.modalBodyLink{
+    justify-self: center;
+    align-items: center;
+    font-size: 32px;
+    color: var(--blue);
+    font-family: inherit;
+    padding: 0 10px;
+}
+
+.modalCreateBtn{
+    height: 80px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 26px;
+    border-top: 3px solid #64a19d;
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+}
+
+#loadingWin{
+    z-index: 999999;
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+}
+
+#loadingWin_h3{
+    color: black;
+    display: none;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.pageLink{
+    outline: none;
+    text-decoration: none !important;
+    color: var(--black) !important;
+    font-family: inherit;
+    display: none;
+    cursor: pointer;
+    z-index: 99999999;
+    font-size: 28px;
+}
+
+.pageLink:hover{
+    color: var(--black) !important;
+}
+
+@media(max-width: 968px){
+    .modalBody{
+        height: 50%;
+        width: 80%;
+    }
+    .closeBodyContBtn{
+        width: 30px;
+        height: 30px;
+    }
+    .brandTextOfModalBody{
+        font-size: 28px;
+    }
+    .modalRewriteCont{
+        justify-content: center;
+        flex-direction: column;
+    }
+    .modalRewriteErrorMessage{
+        margin: 0;
+        font-size: 22px;
+    }
+    .modalRewriteInput{
+        width: 80%;
+        font-size: 22px;
+    }
+    .modalRewriteCheckBtn{
+        width:80%;
+    }
+    .modalBodyLink{
+        font-size: 24px;
+    }
+    .modalCreateBtn{
+        font-size: 20px;
+    }
+}
+@media(max-width: 768px){
+    .modalBody{
+        height: 50%;
+        width: 100%;
+        grid-template: 1fr 1fr 1fr 1fr / 1fr;
+    }
+    .closeBodyContBtn{
+        width: 30px;
+        height: 30px;
+    }
+    .brandTextOfModalBody{
+        font-size: 18px;
+    }
+
+    .modalRewriteCont{
+        align-self: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .modalRewriteErrorMessage{
+        margin: 0;
+        font-size: 12px;
+    }
+    .modalRewriteInput{
+        width: 80%;
+        font-size: 14px;
+    }
+    .modalRewriteCheckBtn{
+        width:80%;
+    }
+    .modalBodyLink{
+        font-size: 14px;
+    }
+    .modalCreateBtn{
+        font-size: 20px;
+    }
+}
+
+.lds-grid {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-grid div {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #000000;
+    animation: lds-grid 1.2s linear infinite;
+}
+.lds-grid div:nth-child(1) {
+    top: 8px;
+    left: 8px;
+    animation-delay: 0s;
+}
+.lds-grid div:nth-child(2) {
+    top: 8px;
+    left: 32px;
+    animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(3) {
+    top: 8px;
+    left: 56px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(4) {
+    top: 32px;
+    left: 8px;
+    animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(5) {
+    top: 32px;
+    left: 32px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(6) {
+    top: 32px;
+    left: 56px;
+    animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(7) {
+    top: 56px;
+    left: 8px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(8) {
+    top: 56px;
+    left: 32px;
+    animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(9) {
+    top: 56px;
+    left: 56px;
+    animation-delay: -1.6s;
+}
+@keyframes lds-grid {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}

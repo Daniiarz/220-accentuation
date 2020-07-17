@@ -19,6 +19,8 @@ Faker = "==2.0.3"
 digitalocean = "*"
 docker = "*"
 celery = "*"
+django-allauth = "*"
+django-rest-auth = "*"
 
 [requires]
 python_version = "3.7"
