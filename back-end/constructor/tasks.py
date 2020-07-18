@@ -28,24 +28,20 @@ def create_domain_record(title, user_id):
 
     with open(f"/usr/src/conf/sites.nginx", "a") as sites_conf:
         configuration = \
-            f"""
-server {{
+f"""server {{
     listen 80;
     server_name {title}.220-accentuation.co;
     server_tokens on;
-    
     location / {{
         root   /usr/src/sites/{title};
         index  index.html index.htm;
         try_files $uri /index.html;
     }}
-    
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {{
         root   /usr/share/nginx/html;
     }}
-}}
-"""
+}}"""
         sites_conf.write(configuration)
 
     user = get_user_model().objects.get(id=user_id)
@@ -54,6 +50,7 @@ server {{
     site = Site.objects.create(name=title, subdomain_id=new_record["domain_record"]["id"], creator=user)
     site.save()
     user.save()
+
 
 @shared_task
 def create_static_site(validated_data, title, template_name, user_id):
@@ -81,6 +78,9 @@ def create_static_site(validated_data, title, template_name, user_id):
     for key, value in validated_data.items():
         soup.find(id=key).string = value
 
+    html_title = soup.find("title")
+    html_title.string = validated_data["brandText"]
+
     # save the file again
     with open(f'{root_dst_dir}/index.html', "w") as outf:
         outf.write(str(soup))
@@ -88,16 +88,29 @@ def create_static_site(validated_data, title, template_name, user_id):
     create_domain_record(slug_title, user_id)
 
     client = docker.DockerClient(base_url='unix://usr/src/run/docker.sock')
+
     container = client.containers.get("220-accentuation_sites-nginx_1")
 
     container.restart(timeout=0)
 
 
 @shared_task
-def delete_user_created_site(domain_id, site_name):
+def delete_user_created_site(site_name, domain_id):
     slug_title = slugify(site_name.lower())
     site_dir = fr'/usr/src/sites/{slug_title}'
     shutil.rmtree(site_dir)
+
+    with open("/usr/src/conf/sites.nginx", "r") as inf:
+        sites_config = list(inf.readlines())
+        pointer = 0
+        for i, line in enumerate(sites_config):
+            if slug_title in line:
+                pointer = i
+                break
+
+    with open("/usr/src/conf/sites.nginx", "w") as out:
+        for i in sites_config[:pointer - 2] + sites_config[pointer + 12:]:
+            out.write(i)
 
     domain = digitalocean.Domain(token=TOKEN, name=NAME)
     records = domain.get_records()

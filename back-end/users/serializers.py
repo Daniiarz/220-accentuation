@@ -1,11 +1,7 @@
 from rest_framework import serializers
 
-from .models import User
 from constructor.serializers import SiteSerializer
-
-from allauth.account.adapter import get_adapter
-from allauth.utils import email_address_exists
-from allauth.account.utils import setup_user_email
+from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):

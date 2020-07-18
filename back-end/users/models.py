@@ -5,7 +5,7 @@ from django.db import models
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, first_name, last_name, email, password, **extra_fields):
+    def create_user(self, first_name, last_name, email, password, **kwargs):
         """
         Creates and saves a new User
         """
@@ -23,19 +23,19 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
-            **extra_fields
+            **kwargs
         )
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, first_name, last_name, password, **extra_fields):
+    def create_superuser(self, email, first_name, last_name, password, **kwargs):
         """
         Creates and saves new superuser
         """
 
-        user = self.create_user(first_name, last_name, email, password, **extra_fields)
+        user = self.create_user(first_name, last_name, email, password, **kwargs)
         user.is_staff = True
         user.is_superuser = True
 
