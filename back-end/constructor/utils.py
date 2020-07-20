@@ -22,6 +22,7 @@ def create_domain_record(title, user_id):
     with open(f"/usr/src/conf/sites.nginx", "a") as sites_conf:
         configuration = \
             f"""
+
 server {{
     listen 80;
     server_name {title}.220-accentuation.co;
@@ -83,10 +84,10 @@ def grayscale_img_routine(validated_data, file_system):
 def grayscale_soup_routine(soup, specific_data):
     for key, img_url in specific_data["img_dict"].items():
         if img_url:
-            soup.find(id=key)["src"] = f"{TRANSFER_PROTOCOL}www.220-accentuation.co/{img_url}"
+            soup.find(id=key)["src"] = f"{TRANSFER_PROTOCOL}www.220-accentuation.co{img_url}"
 
     soup.find(id="masthead")["style"] = \
-        f"background-image: url({TRANSFER_PROTOCOL}www.220-accentuation.co/{specific_data['mastheadImg']});" \
+        f"background-image: url({TRANSFER_PROTOCOL}www.220-accentuation.co{specific_data['mastheadImg']});" \
         f" color: '{specific_data['mastheadColor']}'"
     soup.find(id="mainNav")["style"] = f"color: {specific_data['mastheadColor']}"
 

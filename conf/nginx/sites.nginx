@@ -12,6 +12,7 @@ server {
         root   /usr/share/nginx/html;
     }
 }
+
 server {
     listen 80;
     server_name freelancer.220-accentuation.co;
