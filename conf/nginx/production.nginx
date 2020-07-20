@@ -61,4 +61,3 @@ server {
     proxy_pass http://sites;
   }
 }
-

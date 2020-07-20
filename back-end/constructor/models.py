@@ -8,6 +8,7 @@ class Site(models.Model):
     """
     name = models.CharField(max_length=150, unique=True)
     subdomain_id = models.IntegerField()
+    template_name = models.CharField(max_length=100)
     creator = models.ForeignKey(get_user_model(),
                                 on_delete=models.CASCADE, related_name="sites", null=True)
     created = models.DateTimeField(auto_now_add=True)

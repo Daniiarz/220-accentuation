@@ -15,7 +15,6 @@ from .utils import NAME, TOKEN, create_domain_record, grayscale_soup_routine
 
 @shared_task
 def create_static_site(validated_data, title, template_name, specific_data, user_id):
-    # Stack overflow code
     slug_title = slugify(title.lower())
 
     root_src_dir = rf'/usr/src/backend/templates/{template_name}'  # Path/Location of the source directory
@@ -58,10 +57,12 @@ def create_static_site(validated_data, title, template_name, specific_data, user
 
 
 @shared_task
-def delete_user_created_site(site_name, domain_id):
+def delete_user_created_site(site_name, domain_id, template_name):
     slug_title = slugify(site_name.lower())
     site_dir = fr'/usr/src/sites/{slug_title}'
+    media_dir = fr'/user/src/back-end/media/sites/{template_name}/{slug_title}'
     shutil.rmtree(site_dir)
+    shutil.rmtree(media_dir)
 
     with open("/usr/src/conf/sites.nginx", "r") as inf:
         sites_config = list(inf.readlines())
@@ -86,4 +87,4 @@ def delete_user_created_site(site_name, domain_id):
 @receiver(signals.pre_delete, sender=Site)
 def delete_static_site(sender, **kwargs):
     site = kwargs["instance"]
-    delete_user_created_site.delay(site.name, site.subdomain_id)
+    delete_user_created_site.delay(site.name, site.subdomain_id, site.template_name)

@@ -53,7 +53,9 @@ class GrayscaleSerializer(serializers.Serializer):
         title = validated_data["brandText"]
         sites = Site.objects.filter(name=title.lower())
 
-        file_system = FileSystemStorage(location=f"media/sites/grayscale/{slugify(title.lower())}")
+        location_url = f"media/sites/grayscale/{slugify(title.lower())}/"
+        file_system = FileSystemStorage(location=location_url, base_url=location_url)
+
         validated_data, specific_data = grayscale_img_routine(validated_data, file_system)
 
         if sites.exists():
