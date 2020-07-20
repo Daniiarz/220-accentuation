@@ -5,55 +5,16 @@ import digitalocean
 import docker
 from bs4 import BeautifulSoup
 from celery import shared_task
-from decouple import config
-from django.contrib.auth import get_user_model
 from django.db.models import signals
 from django.dispatch import receiver
 from django.utils.text import slugify
 
-from constructor.models import Site
-
-TOKEN = config("DO_TOKEN")
-DATA = config("DO_DATA")
-NAME = config("DO_NAME")
-
-
-def create_domain_record(title, user_id):
-    domain = digitalocean.Domain(token=TOKEN, name=NAME)
-    new_record = domain.create_new_domain_record(
-        type='A',
-        name=title,
-        data=DATA
-    )
-
-    with open(f"/usr/src/conf/sites.nginx", "a") as sites_conf:
-        configuration = \
-f"""server {{
-    listen 80;
-    server_name {title}.220-accentuation.co;
-    server_tokens on;
-    location / {{
-        root   /usr/src/sites/{title};
-        index  index.html index.htm;
-        try_files $uri /index.html;
-    }}
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {{
-        root   /usr/share/nginx/html;
-    }}
-}}"""
-        sites_conf.write(configuration)
-
-    user = get_user_model().objects.get(id=user_id)
-    user.sites_created += 1
-
-    site = Site.objects.create(name=title, subdomain_id=new_record["domain_record"]["id"], creator=user)
-    site.save()
-    user.save()
+from .models import Site
+from .utils import NAME, TOKEN, create_domain_record, grayscale_soup_routine
 
 
 @shared_task
-def create_static_site(validated_data, title, template_name, user_id):
+def create_static_site(validated_data, title, template_name, specific_data, user_id):
     # Stack overflow code
     slug_title = slugify(title.lower())
 
@@ -75,8 +36,12 @@ def create_static_site(validated_data, title, template_name, user_id):
         txt = inf.read()
         soup = BeautifulSoup(txt, features="html.parser")
 
+    if template_name == "grayscale":
+        soup = grayscale_soup_routine(soup, specific_data)
+
     for key, value in validated_data.items():
-        soup.find(id=key).string = value
+        if value:
+            soup.find(id=key).string = value
 
     html_title = soup.find("title")
     html_title.string = validated_data["brandText"]
@@ -88,9 +53,7 @@ def create_static_site(validated_data, title, template_name, user_id):
     create_domain_record(slug_title, user_id)
 
     client = docker.DockerClient(base_url='unix://usr/src/run/docker.sock')
-
     container = client.containers.get("220-accentuation_sites-nginx_1")
-
     container.restart(timeout=0)
 
 

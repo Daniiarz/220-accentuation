@@ -1,7 +1,10 @@
+from django.core.files.storage import FileSystemStorage
+from django.utils.text import slugify
 from rest_framework import serializers
 
 from .models import Site, Template
 from .tasks import create_static_site
+from .utils import grayscale_img_routine
 
 
 class SiteSerializer(serializers.ModelSerializer):
@@ -18,8 +21,8 @@ class TemplateSerializer(serializers.ModelSerializer):
         model = Template
         fields = (
             "name",
+            "sample_link",
             "link",
-            "img"
         )
 
 
@@ -30,21 +33,30 @@ class GrayscaleSerializer(serializers.Serializer):
     aboutDesc1 = serializers.CharField()
     aboutDesc2 = serializers.CharField()
     aboutDesc3 = serializers.CharField()
-    aboutText1 = serializers.CharField()
-    aboutText2 = serializers.CharField()
-    aboutText3 = serializers.CharField()
-    address = serializers.CharField()
-    brandText = serializers.CharField()
+    aboutText1 = serializers.CharField(max_length=100)
+    aboutText2 = serializers.CharField(max_length=100)
+    aboutText3 = serializers.CharField(max_length=100)
+    address = serializers.CharField(max_length=50)
+    brandText = serializers.CharField(max_length=50)
     email = serializers.EmailField()
     homeDesc = serializers.CharField()
     homeText = serializers.CharField()
     phone = serializers.CharField()
+    mastheadImg = serializers.ImageField(allow_null=True)
+    mastheadColor = serializers.CharField(max_length=50)
+    aboutImg1 = serializers.ImageField(allow_null=True)
+    aboutImg2 = serializers.ImageField(allow_null=True)
+    aboutImg3 = serializers.ImageField(allow_null=True)
 
     def create(self, **kwargs):
         validated_data = self.validated_data
-        title = validated_data["brandText"].lower()
-        sites = Site.objects.filter(name=title)
+        title = validated_data["brandText"]
+        sites = Site.objects.filter(name=title.lower())
+
+        file_system = FileSystemStorage(location=f"media/sites/grayscale/{slugify(title.lower())}")
+        validated_data, specific_data = grayscale_img_routine(validated_data, file_system)
+
         if sites.exists():
             raise ValueError("This domain is already taken, and why do you know this endpoint?")
 
-        create_static_site.delay(validated_data, title, "grayscale", kwargs["user_id"])
+        create_static_site.delay(validated_data, title, "grayscale", specific_data, kwargs["user_id"])

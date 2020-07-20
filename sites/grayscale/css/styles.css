@@ -67,7 +67,6 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
   text-align: left;
   background-color: #fff;
 }
@@ -10154,7 +10153,6 @@ body {
   outline: none;
 }
 #mainNav .navbar-brand {
-  color: #000000;
   font-weight: 700;
   padding: 0.9rem 0;
 }
@@ -10177,7 +10175,6 @@ body {
   }
   #mainNav .navbar-brand {
     padding: 0.5rem 0;
-    color: rgba(255, 255, 255, 0.5);
   }
   #mainNav .nav-link {
     transition: none;

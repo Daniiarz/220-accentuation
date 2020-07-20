@@ -69,9 +69,6 @@ const address = document.getElementById("address");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 
-const uploadImage1 = document.getElementById("uploadImage1");
-const aboutImage1 = document.getElementById("aboutImage1");
-
 const inputList = [
     brandText,
     homeText,
@@ -118,7 +115,13 @@ const sendObj = {
     aboutDesc3: ``,
     address: ``,
     email: ``,
-    phone: ``
+    phone: ``,
+    mastheadImg: null,
+    mastheadColor: `#B3B3B3`,
+    aboutImg1: null,
+    aboutImg2: null,
+    aboutImg3: null,
+
 };
 
 const modalBody = createElement("div", "class", "modalBody", null, null);
@@ -170,43 +173,37 @@ const modalWin = document.getElementById("modalWin");
 const sendBtn = document.getElementById("send-btn");
 const modalWinBtn = document.getElementById("modalWinBtn");
 
-uploadImage1.addEventListener("change", (i) => {
-    aboutImage1.setAttribute("src", i.target.value)
-    aboutImage1.style.display = "unset"
-});
-
 closeBodyContBtnCont.appendChild(svgImg);
 brandTextOfModalBody.textContent = sendObj.title;
 
 sendBtn.addEventListener("click", () => {
+
     if (checkFills()) {
         fetch("http://www.220-accentuation.co/api/constructor/checkTitle/", {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'multipart/form-data'},
             body: JSON.stringify({
                 title: sendObj.brandText
             })
         }).then(response => {
-                console.log(response)
-                if (!response.ok) throw response
-                return response.json()
-            })
-            .then(() => {
+            console.log(response)
+            if (!response.ok) throw response
+            return response.json()
+        }).then(() => {
+            modalBody.appendChild(brandTextOfModalBody)
+            modalBody.appendChild(closeBodyContBtnCont);
+            modalBody.appendChild(modalBodyLink);
+            modalBody.appendChild(modalCreateBtn);
+        }).catch((err) => {
+            if (err === 400) {
                 modalBody.appendChild(brandTextOfModalBody)
                 modalBody.appendChild(closeBodyContBtnCont);
+                modalBody.appendChild(modalRewriteCont);
                 modalBody.appendChild(modalBodyLink);
-                modalBody.appendChild(modalCreateBtn);
-            })
-            .catch((err) => {
-                if (err === 400){
-                    modalBody.appendChild(brandTextOfModalBody)
-                    modalBody.appendChild(closeBodyContBtnCont);
-                    modalBody.appendChild(modalRewriteCont);
-                    modalBody.appendChild(modalBodyLink);
-                }else {
-                    const errText = createElement("p", "class", "errorText", null, null, `${err.status}`)
-                }
-            })
+            } else {
+                const errText = createElement("p", "class", "errorText", null, null, `${err.status}`)
+            }
+        })
         modalCont.style.zIndex = "99999";
         modalCont.style.background = "rgba(0, 0, 0, 0.79)";
         closeBodyContBtnCont.addEventListener("click", function () {
@@ -257,4 +254,57 @@ function createElement(tagName, atr, atrName, atr2, atrName2, text) {
     el.textContent = text;
     return el;
 }
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+const aboutImage = document.querySelectorAll(".aboutImage");
+const uploadPhoto = document.querySelectorAll(".uploadImage");
+const uploader = document.querySelectorAll(".uploader");
+
+uploadPhoto.forEach((input, index) => {
+    input.addEventListener("input", file => {
+        console.log(input.id)
+        const reader = new FileReader();
+        reader.readAsDataURL(file.target.files[0]);
+        sendObj[input.id] = file.target.files[0];
+        reader.onload = () => {
+            aboutImage[index].setAttribute("src", `${reader.result}`)
+            uploader[index].style.color = "#fd7e14";
+            console.log(sendObj);
+        }
+    })
+});
+
+const masthead = document.querySelector(".masthead");
+const mastheadInputFile = document.getElementById("mastheadInputFile");
+
+mastheadInputFile.addEventListener("input", file => {
+    const reader = new FileReader();
+    sendObj.mastheadImg = file.target.files[0];
+    reader.readAsDataURL(file.target.files[0]);
+    reader.onload = () => {
+        masthead.style.backgroundImage = `url("${reader.result}")`;
+    }
+})
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+const mastheadColor = document.getElementById("mastheadColor");
+const colorLabel = document.getElementById("colorLabel");
+const colorBox = document.getElementById("colorBox");
+mastheadColor.addEventListener("input", (color) => {
+    document.querySelector("header").style.color = `${color.target.value}`;
+    colorBox.style.backgroundColor = `${color.target.value}`;
+    sendObj.mastheadColor = `${color.target.value}`;
+    console.log(sendObj)
+});
+
+[brandText, homeText, homeDesc].forEach(e => {
+    e.addEventListener("input", i => {
+        colorLabel.style.right = "0";
+    });
+});
+
+
+
 

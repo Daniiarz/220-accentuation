@@ -16,21 +16,30 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet"/>
 </head>
-<body id="page-top">
+<body style="color: #afafaf" id="page-top">
 <div id="modalCont">
 </div>
 <div id="loadingWin">
     <h3 id="loadingWin_h3">Your site created successfully</h3>
     <div id="loader" class="lds-grid">
-        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
 </div>
 <!-- Navigation-->
 <div class="page-content">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
             <label>
-                <input class="navbar-brand js-scroll-trigger" placeholder="Type your logo text" id="brandText" maxlength="20" type="text">
+                <input class="navbar-brand js-scroll-trigger" placeholder="Type your logo text" id="brandText"
+                       maxlength="20" type="text">
             </label>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -47,14 +56,33 @@
         </div>
     </nav>
     <!-- Masthead-->
-    <header class="masthead">
-        <div class="container overflow-hidden d-flex h-100 align-items-center">
+    <header class="masthead" style="overflow: hidden">
+        <label class="uploaderLabel mastheadUploaderLabel d-flex flex-column align-items-center" for="mastheadInputFile">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="mastheadUploader bi bi-download"
+                 fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+                <path fill-rule="evenodd"
+                      d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+            </svg>
+            upload your image
+        </label>
+        <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
+               class="mastheadInputFile" id="mastheadInputFile">
+        <div class="container overflow-hidden d-flex h-100 align-items-center p-0">
             <div class="mx-auto text-center d-flex flex-column">
                 <label>
                     <input class="mx-auto my-0 text-uppercase" placeholder="Type your text" id="homeText" type="text">
                 </label>
-                <textarea id="homeDesc" placeholder="Type your text" class="text-white-50 mx-auto mt-2 mb-5" cols="30"
+                <textarea id="homeDesc" placeholder="Type your text" class="mx-auto mt-2 mb-5" cols="30"
                           rows="1"></textarea>
+                <label for="mastheadColor" id="colorLabel">
+                    <div id="colorBox"></div>
+                    <p id="colorText">choose font color</p>
+                </label>
+                <input style="display: none" type="color" id="mastheadColor"/>
             </div>
         </div>
     </header>
@@ -63,21 +91,24 @@
         <div class="container">
             <!-- Featured Project Row-->
             <div class="about-mini-cont row align-items-center no-gutters mb-4 mb-lg-5">
-                <div class="col-xl-8 col-lg-7">
-                    <img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt=""/>
-                    <!--                <label class="uploaderLabel d-flex flex-column align-items-center" for="uploadImage1">-->
-                    <!--                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="uploader bi bi-download" fill="currentColor"-->
-                    <!--                         xmlns="http://www.w3.org/2000/svg">-->
-                    <!--                        <path fill-rule="evenodd"-->
-                    <!--                              d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>-->
-                    <!--                        <path fill-rule="evenodd"-->
-                    <!--                              d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>-->
-                    <!--                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>-->
-                    <!--                    </svg>-->
-                    <!--                    upload your image-->
-                    <!--                </label>-->
-                    <!--                <img src="C:\fakepath\levi-ackerman-4k-attack-on-titan-levi-green-leaves.jpg" id="aboutImage1" alt="">-->
-                    <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof="" id="uploadImage1">
+                <div class="col-xl-8 col-lg-7 about-upload-cont">
+                    <!--                    <img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt=""/>-->
+                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutImg1">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="uploader bi bi-download"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+                            <path fill-rule="evenodd"
+                                  d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+                        </svg>
+                        upload your image
+                    </label>
+                    <img src="assets/img/bg-masthead.jpg"  class="aboutImage"
+                         alt="">
+                    <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
+                           class="uploadImage" id="aboutImg1">
                 </div>
                 <div class="col-xl-4 col-lg-5">
                     <div class="featured-text text-center text-lg-left">
@@ -93,7 +124,24 @@
             </div>
             <!-- Project One Row-->
             <div class="about-mini-cont row justify-content-center no-gutters mb-5 mb-lg-0">
-                <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-01.jpg" alt=""/></div>
+                <div class="col-lg-6  about-upload-cont">
+                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutImg2">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="uploader bi bi-download"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+                            <path fill-rule="evenodd"
+                                  d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+                        </svg>
+                        upload your image
+                    </label>
+                    <img src="assets/img/demo-image-01.jpg" class="aboutImage"
+                         alt="">
+                    <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
+                           class="uploadImage" id="aboutImg2">
+                </div>
                 <div class="col-lg-6">
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
@@ -113,7 +161,24 @@
             </div>
             <!-- Project Two Row-->
             <div class="about-mini-cont row justify-content-center no-gutters">
-                <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt=""/></div>
+                <div class="col-lg-6 about-upload-cont">
+                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutImg3">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="uploader bi bi-download"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+                            <path fill-rule="evenodd"
+                                  d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+                        </svg>
+                        upload your image
+                    </label>
+                    <img  src="assets/img/demo-image-02.jpg" class="aboutImage"
+                         alt="">
+                    <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
+                           class="uploadImage" id="aboutImg3">
+                </div>
                 <div class="col-lg-6 order-lg-first">
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
@@ -137,11 +202,12 @@
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="row">
+                <div class="picker"></div>
                 <div class="col-md-4 mb-3 mb-md-0">
                     <div class="card py-4 h-100">
                         <div class="card-body text-center">
                             <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Address</h4>
+                            <h4 class="contactsH4 text-uppercase m-0">Address</h4>
                             <hr class="my-4"/>
                             <div class="small text-black-50">
                                 <input placeholder="type your address" type="text" id="address"/>
@@ -153,7 +219,7 @@
                     <div class="card py-4 h-100">
                         <div class="card-body text-center">
                             <i class="fas fa-envelope text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Email</h4>
+                            <h4 class="contactsH4 text-uppercase m-0">Email</h4>
                             <hr class="my-4"/>
                             <div class="small text-black-50">
                                 <input placeholder="type your email" type="text" id="email"/>
@@ -165,7 +231,7 @@
                     <div class="card py-4 h-100">
                         <div class="card-body text-center">
                             <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Phone</h4>
+                            <h4 class="contactsH4 text-uppercase m-0">Phone</h4>
                             <hr class="my-4"/>
                             <div class="small text-black-50">
                                 <input placeholder="type your phone" type="text" id="phone"/>
@@ -204,6 +270,7 @@
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+<script src="js/scripts.js">
+</script>
 </body>
 </html>

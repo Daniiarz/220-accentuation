@@ -22,8 +22,8 @@ class Template(models.Model):
     """
 
     name = models.CharField(max_length=25)
-    img = models.ImageField(upload_to="template_imgs/")
-    link = models.CharField(max_length=225)
+    sample_link = models.CharField(max_length=255, null=True)
+    constructor_link = models.CharField(max_length=225)
 
     def __str__(self):
         return self.name

@@ -18,11 +18,11 @@ services:
     volumes:
       - media:/usr/src/backend/media/
       - static:/usr/src/backend/static/
-    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --no-input && gunicorn -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 -w 4 --log-level debug accentuation_220.asgi:application "
+    command: sh -c "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 -w 4 --log-level info accentuation_220.asgi:application"
     depends_on:
       - db
       - celery-worker
-    restart: on-failure
+    restart: always
 
   nginx:
     build:

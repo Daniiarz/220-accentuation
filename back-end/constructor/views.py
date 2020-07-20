@@ -7,7 +7,7 @@ from rest_framework.settings import api_settings
 
 from .serializers import GrayscaleSerializer, TemplateSerializer
 from .models import Site, Template
-from .permissions import MaxAmountNotExceeded
+from . import permissions as custom_permissions
 
 
 class TemplatesView(ListAPIView):
@@ -20,7 +20,7 @@ class TemplatesView(ListAPIView):
 
 class ConstructorView(GenericAPIView):
     serializer_class = GrayscaleSerializer
-    permission_classes = [permissions.IsAuthenticated, MaxAmountNotExceeded]
+    permission_classes = [permissions.IsAuthenticated, custom_permissions.MaxAmountNotExceeded]
 
     def post(self, request, *args, **kwargs):
         """
