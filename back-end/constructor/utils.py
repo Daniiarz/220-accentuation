@@ -21,7 +21,8 @@ def create_domain_record(title, user_id):
 
     with open(f"/usr/src/conf/sites.nginx", "a") as sites_conf:
         configuration = \
-            f"""server {{
+            f"""
+server {{
     listen 80;
     server_name {title}.220-accentuation.co;
     server_tokens on;
@@ -80,13 +81,6 @@ def grayscale_img_routine(validated_data, file_system):
 
 
 def grayscale_soup_routine(soup, specific_data):
-    print()
-    print()
-    print()
-    print(specific_data)
-    print()
-    print()
-    print()
     for key, img_url in specific_data["img_dict"].items():
         if img_url:
             soup.find(id=key)["src"] = f"{TRANSFER_PROTOCOL}www.220-accentuation.co/{img_url}"
