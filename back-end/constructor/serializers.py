@@ -44,9 +44,9 @@ class GrayscaleSerializer(serializers.Serializer):
     phone = serializers.CharField()
     mastheadImg = serializers.ImageField(allow_null=True, allow_empty_file=True)
     mastheadColor = serializers.CharField(max_length=50,)
-    aboutImg1 = serializers.ImageField(allow_empty_file=True)
-    aboutImg2 = serializers.ImageField(allow_empty_file=True)
-    aboutImg3 = serializers.ImageField(allow_empty_file=True)
+    aboutImg1 = serializers.ImageField(allow_null=True, allow_empty_file=True)
+    aboutImg2 = serializers.ImageField(allow_null=True, allow_empty_file=True)
+    aboutImg3 = serializers.ImageField(allow_null=True, allow_empty_file=True)
 
     def create(self, **kwargs):
         validated_data = self.validated_data
