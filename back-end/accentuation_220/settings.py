@@ -47,11 +47,12 @@ INSTALLED_APPS = [
 
     "rest_framework",
     'rest_framework.authtoken',
-    
     "djoser",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -196,3 +197,7 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {},
 }
+
+# CORS
+
+CORS_ORIGIN_ALLOW_ALL = True

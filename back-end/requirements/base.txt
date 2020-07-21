@@ -9,3 +9,4 @@ docker==4.2.2
 celery==4.4.6
 djoser==2.0.3
 djangorestframework_simplejwt==4.4.0
+django-cors-headers==3.4.0
