@@ -22,7 +22,7 @@ class TemplateSerializer(serializers.ModelSerializer):
         fields = (
             "name",
             "sample_link",
-            "link",
+            "constructor_link",
         )
 
 
@@ -42,11 +42,11 @@ class GrayscaleSerializer(serializers.Serializer):
     homeDesc = serializers.CharField()
     homeText = serializers.CharField()
     phone = serializers.CharField()
-    mastheadImg = serializers.ImageField(allow_null=True)
-    mastheadColor = serializers.CharField(max_length=50)
-    aboutImg1 = serializers.ImageField(allow_null=True)
-    aboutImg2 = serializers.ImageField(allow_null=True)
-    aboutImg3 = serializers.ImageField(allow_null=True)
+    mastheadImg = serializers.ImageField(allow_null=True, allow_empty_file=True)
+    mastheadColor = serializers.CharField(max_length=50,)
+    aboutImg1 = serializers.ImageField(allow_empty_file=True)
+    aboutImg2 = serializers.ImageField(allow_empty_file=True)
+    aboutImg3 = serializers.ImageField(allow_empty_file=True)
 
     def create(self, **kwargs):
         validated_data = self.validated_data
