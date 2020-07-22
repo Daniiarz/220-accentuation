@@ -54,12 +54,6 @@ def grayscale_img_routine(validated_data, file_system):
     altered_img_dict = {}
     specific_data = {}
 
-    print()
-    print()
-    print()
-    print(validated_data)
-    print()
-    print()
     masthead_bg = validated_data["mastheadImg"]
     if masthead_bg:
         file_system.save(name=masthead_bg.name, content=masthead_bg)
@@ -87,13 +81,14 @@ def grayscale_img_routine(validated_data, file_system):
 
 
 def grayscale_soup_routine(soup, specific_data):
+
     for key, img_url in specific_data["img_dict"].items():
         if img_url:
             soup.find(id=key)["src"] = f"{TRANSFER_PROTOCOL}www.220-accentuation.co/{img_url}"
 
     masthead_style = f"color: '{specific_data['mastheadColor']}';"
 
-    if specific_data["mastheadImg"]:
+    if specific_data.get("mastheadImg", ""):
         masthead_style += \
             f"background-image: url({TRANSFER_PROTOCOL}www.220-accentuation.co/{specific_data['mastheadImg']});"
     soup.find(id="masthead")["style"] = masthead_style

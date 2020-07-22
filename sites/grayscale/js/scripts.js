@@ -55,6 +55,13 @@
     $(window).scroll(navbarCollapse);
 })(jQuery); // End of use strict
 
+const aboutImage1 = document.querySelector(".aboutImage1");
+const aboutImage2 = document.querySelector(".aboutImage2");
+const aboutImage3 = document.querySelector(".aboutImage3");
+const uploader1 = document.querySelector(".uploader1");
+const uploader2 = document.querySelector(".uploader2");
+const uploader3 = document.querySelector(".uploader3");
+const masthead = document.querySelector(".masthead");
 const modalCont = document.getElementById("modalCont")
 const brandText = document.getElementById("brandText");
 const homeText = document.getElementById("homeText");
@@ -68,6 +75,10 @@ const aboutDesc3 = document.getElementById("aboutDesc3");
 const address = document.getElementById("address");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
+const mastheadInputFile = document.getElementById("mastheadInputFile");
+const aboutImg1 = document.getElementById("aboutImg1");
+const aboutImg2 = document.getElementById("aboutImg2");
+const aboutImg3 = document.getElementById("aboutImg3");
 
 const inputList = [
     brandText,
@@ -82,6 +93,10 @@ const inputList = [
     address,
     email,
     phone,
+    mastheadInputFile,
+    aboutImg1,
+    aboutImg2,
+    aboutImg3,
 ];
 
 const checkFills = () => {
@@ -116,12 +131,11 @@ const sendObj = {
     address: ``,
     email: ``,
     phone: ``,
-    mastheadImg: null,
+    mastheadImg: ``,
     mastheadColor: `#B3B3B3`,
-    aboutImg1: null,
-    aboutImg2: null,
-    aboutImg3: null,
-
+    aboutImg1: ``,
+    aboutImg2: ``,
+    aboutImg3: ``,
 };
 
 const modalBody = createElement("div", "class", "modalBody", null, null);
@@ -140,6 +154,38 @@ const modalCreateBtn = createElement("button", "class", "modalCreateBtn", null, 
 
 inputList.forEach((input) => {
     input.addEventListener("input", (i) => {
+        if (i.originalTarget.id === "aboutImg1"||i.originalTarget.id === "aboutImg2"||i.originalTarget.id === "aboutImg3"){
+            const reader = new FileReader();
+            console.log(i.originalTarget.id , i.target.files[0])
+            reader.readAsDataURL(i.target.files[0]);
+            reader.onload = () => {
+                if (i.originalTarget.id === "aboutImg1") {
+                    sendObj.aboutImg1 = i.target.files[0];
+                    aboutImage1.setAttribute("src", `${reader.result}`);
+                    uploader1.style.color = "#fd7e14";
+                }
+                if (i.originalTarget.id === "aboutImg2") {
+                    sendObj.aboutImg2 = i.target.files[0];
+                    aboutImage2.setAttribute("src", `${reader.result}`)
+                    uploader2.style.color = "#fd7e14";
+                }
+                if (i.originalTarget.id === "aboutImg3") {
+                    sendObj.aboutImg3 = i.target.files[0];
+                    aboutImage3.setAttribute("src", `${reader.result}`)
+                    uploader3.style.color = "#fd7e14";
+                }
+
+            }
+        }
+        if (i.originalTarget.id === "mastheadInputFile"){
+            const reader = new FileReader();
+            sendObj.mastheadImg = i.target.files[0];
+            console.log(i.originalTarget.id, i.target.files[0])
+            reader.readAsDataURL(i.target.files[0]);
+            reader.onload = () => {
+                masthead.style.backgroundImage = `url("${reader.result}")`;
+            }
+        }
         if (i.originalTarget.id === "brandText") {
             brandTextOfModalBody.textContent = i.target.value;
             modalRewriteInput.value = i.target.value;
@@ -183,13 +229,12 @@ sendBtn.addEventListener("click", () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+                'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk2MTc2NjI1LCJqdGkiOiI2MWI2ZTFjNzcyZWY0OTJmYmIyZjcxNzk4Y2FhNjcxMyIsInVzZXJfaWQiOjF9.DdCOOBxmeryBX0ZR1EqEkENGWkfP-qzeMwOHfit6A2Q`,
             },
             body: JSON.stringify({
                 title: sendObj.brandText
             })
         }).then(response => {
-            console.log(response)
             if (!response.ok) throw response
             return response.json()
         }).then(() => {
@@ -204,7 +249,7 @@ sendBtn.addEventListener("click", () => {
                 modalBody.appendChild(modalRewriteCont);
                 modalBody.appendChild(modalBodyLink);
             } else {
-                const errText = createElement("p", "class", "errorText", null, null, `${err.status}`)
+                console.log(err.text)
             }
         })
         modalCont.style.zIndex = "99999";
@@ -216,16 +261,35 @@ sendBtn.addEventListener("click", () => {
         modalCont.appendChild(modalBody);
     }
 });
-modalCreateBtn.addEventListener("click", () => {
+modalCreateBtn.addEventListener("click", async function () {
+    console.log(sendObj)
+    let formData = new FormData();
+
+    formData.append('brandText', sendObj.brandText);
+    formData.append('homeText', sendObj.homeText);
+    formData.append('homeDesc', sendObj.homeDesc);
+    formData.append('aboutText1', sendObj.aboutText1);
+    formData.append('aboutText2', sendObj.aboutText2);
+    formData.append('aboutText3', sendObj.aboutText3);
+    formData.append('aboutDesc1', sendObj.aboutDesc1);
+    formData.append('aboutDesc2', sendObj.aboutDesc2);
+    formData.append('aboutDesc3', sendObj.aboutDesc3);
+    formData.append('address', sendObj.address);
+    formData.append('phone', sendObj.phone);
+    formData.append('email', sendObj.email);
+    formData.append('mastheadColor', sendObj.mastheadColor);
+    formData.append('mastheadImg', sendObj.mastheadImg, sendObj.mastheadImg.name);
+    formData.append('aboutImg1', sendObj.aboutImg1, sendObj.aboutImg1.name);
+    formData.append('aboutImg2', sendObj.aboutImg2, sendObj.aboutImg2.name);
+    formData.append('aboutImg3', sendObj.aboutImg3, sendObj.aboutImg3.name);
+
     fetch("http://www.220-accentuation.co/api/constructor/", {
         method: 'POST',
         headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+            'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk2MTc2NjI1LCJqdGkiOiI2MWI2ZTFjNzcyZWY0OTJmYmIyZjcxNzk4Y2FhNjcxMyIsInVzZXJfaWQiOjF9.DdCOOBxmeryBX0ZR1EqEkENGWkfP-qzeMwOHfit6A2Q`
         },
-        body: JSON.stringify(sendObj)
+        body: formData
     }).then(response => {
-        console.log(response)
         if (!response.ok) throw response
         return response.json()
     }).then(() => {
@@ -244,8 +308,14 @@ modalCreateBtn.addEventListener("click", () => {
             loader.style.display = "none";
             pageLink.style.display = "block"
         }, 10000)
-    }).catch((er) => {
-        console.log(er)
+    }).catch((err) => {
+        if (typeof err.text === 'function') {
+            err.text().then(errorMessage => {
+                console.log(errorMessage);
+            });
+        } else {
+            console.log(err)
+        }
     })
 })
 
@@ -261,38 +331,6 @@ function createElement(tagName, atr, atrName, atr2, atrName2, text) {
     return el;
 }
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------
-
-const aboutImage = document.querySelectorAll(".aboutImage");
-const uploadPhoto = document.querySelectorAll(".uploadImage");
-const uploader = document.querySelectorAll(".uploader");
-
-uploadPhoto.forEach((input, index) => {
-    input.addEventListener("input", file => {
-        console.log(input.id)
-        const reader = new FileReader();
-        reader.readAsDataURL(file.target.files[0]);
-        sendObj[input.id] = file.target.files[0];
-        reader.onload = () => {
-            aboutImage[index].setAttribute("src", `${reader.result}`)
-            uploader[index].style.color = "#fd7e14";
-            console.log(sendObj);
-        }
-    })
-});
-
-const masthead = document.querySelector(".masthead");
-const mastheadInputFile = document.getElementById("mastheadInputFile");
-
-mastheadInputFile.addEventListener("input", file => {
-    const reader = new FileReader();
-    sendObj.mastheadImg = file.target.files[0];
-    reader.readAsDataURL(file.target.files[0]);
-    reader.onload = () => {
-        masthead.style.backgroundImage = `url("${reader.result}")`;
-    }
-})
-
 // ---------------------------------------------------------------------------------------------------------------------------
 
 const mastheadColor = document.getElementById("mastheadColor");
@@ -302,7 +340,6 @@ mastheadColor.addEventListener("input", (color) => {
     document.querySelector("header").style.color = `${color.target.value}`;
     colorBox.style.backgroundColor = `${color.target.value}`;
     sendObj.mastheadColor = `${color.target.value}`;
-    console.log(sendObj)
 });
 
 [brandText, homeText, homeDesc].forEach(e => {

@@ -125,6 +125,7 @@
     text-align: inherit;
     max-height: 150px;
     letter-spacing: 0.0625em;
+    color: rgba(0, 0, 0, 0.5) !important;
     font-size: 90%;
     outline: none;
     border: none;
@@ -167,13 +168,13 @@
     }
 }
 
-.uploader, .mastheadUploader {
+.uploader1,.uploader2,.uploader3, .mastheadUploader {
     width: 50px;
     height: 50px;
     z-index: 2;
 }
 
-.aboutImage {
+.aboutImage1,.aboutImage2,.aboutImage3 {
     position: absolute;
     top: 0;
     width: inherit;
@@ -271,6 +272,7 @@
     justify-content: center;
     background: var(--danger);
     transition: .5s ease-in-out;
+    z-index: 999999;
 }
 
 #modalWin p {

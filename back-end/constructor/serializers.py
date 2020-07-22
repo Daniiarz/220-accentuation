@@ -43,10 +43,10 @@ class GrayscaleSerializer(serializers.Serializer):
     homeText = serializers.CharField()
     phone = serializers.CharField()
     mastheadImg = serializers.ImageField(allow_null=True, allow_empty_file=True)
-    mastheadColor = serializers.CharField(max_length=50,)
+    mastheadColor = serializers.CharField(max_length=50)
     aboutImg1 = serializers.ImageField(allow_null=True, allow_empty_file=True)
     aboutImg2 = serializers.ImageField(allow_null=True, allow_empty_file=True)
-    aboutImg3 = serializers.ImageField(allow_null=True, allow_empty_file=True)
+    aboutImg3 = serializers.FileField(allow_null=True, allow_empty_file=True)
 
     def create(self, **kwargs):
         validated_data = self.validated_data
@@ -57,8 +57,8 @@ class GrayscaleSerializer(serializers.Serializer):
         file_system = FileSystemStorage(location=location_url, base_url=location_url)
 
         validated_data, specific_data = grayscale_img_routine(validated_data, file_system)
-
         if sites.exists():
             raise ValueError("This domain is already taken, and why do you know this endpoint?")
 
-        create_static_site.delay(validated_data, title, "grayscale", specific_data, kwargs["user_id"])
+        # TODO: add .delay
+        create_static_site(validated_data, title, "grayscale", specific_data, kwargs["user_id"])
