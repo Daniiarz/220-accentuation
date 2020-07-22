@@ -154,30 +154,41 @@ const modalCreateBtn = createElement("button", "class", "modalCreateBtn", null, 
 
 inputList.forEach((input) => {
     input.addEventListener("input", (i) => {
-        if (i.originalTarget.id === "aboutImg1"||i.originalTarget.id === "aboutImg2"||i.originalTarget.id === "aboutImg3"){
-            const reader = new FileReader();
-            console.log(i.originalTarget.id , i.target.files[0])
-            reader.readAsDataURL(i.target.files[0]);
-            reader.onload = () => {
-                if (i.originalTarget.id === "aboutImg1") {
-                    sendObj.aboutImg1 = i.target.files[0];
-                    aboutImage1.setAttribute("src", `${reader.result}`);
+        if (i.originalTarget.id === "aboutImg1" || i.originalTarget.id === "aboutImg2" || i.originalTarget.id === "aboutImg3") {
+
+            if (i.originalTarget.id === "aboutImg1") {
+                const reader1 = new FileReader();
+                console.log(i.originalTarget.id, i.target.files[0])
+                reader1.readAsDataURL(i.target.files[0]);
+                sendObj.aboutImg1 = i.target.files[0];
+                reader1.onload= () => {
+                    aboutImage1.setAttribute("src", `${reader1.result}`);
                     uploader1.style.color = "#fd7e14";
                 }
-                if (i.originalTarget.id === "aboutImg2") {
-                    sendObj.aboutImg2 = i.target.files[0];
-                    aboutImage2.setAttribute("src", `${reader.result}`)
+            }
+            if (i.originalTarget.id === "aboutImg2") {
+                const reader2 = new FileReader();
+                console.log(i.originalTarget.id, i.target.files[0])
+                reader2.readAsDataURL(i.target.files[0]);
+                sendObj.aboutImg2 = i.target.files[0];
+                reader2.onload = () => {
+                    aboutImage2.setAttribute("src", `${reader2.result}`)
                     uploader2.style.color = "#fd7e14";
                 }
-                if (i.originalTarget.id === "aboutImg3") {
-                    sendObj.aboutImg3 = i.target.files[0];
-                    aboutImage3.setAttribute("src", `${reader.result}`)
+            }
+            if (i.originalTarget.id === "aboutImg3") {
+                const reader3 = new FileReader();
+                console.log(i.originalTarget.id, i.target.files[0])
+                reader3.readAsDataURL(i.target.files[0]);
+                sendObj.aboutImg3 = i.target.files[0];
+                reader3.onload = () => {
+                    aboutImage3.setAttribute("src", `${reader3.result}`)
                     uploader3.style.color = "#fd7e14";
                 }
-
             }
+
         }
-        if (i.originalTarget.id === "mastheadInputFile"){
+        if (i.originalTarget.id === "mastheadInputFile") {
             const reader = new FileReader();
             sendObj.mastheadImg = i.target.files[0];
             console.log(i.originalTarget.id, i.target.files[0])
