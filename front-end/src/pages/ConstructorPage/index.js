@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState ,useEffect} from "react";
 import style from "./constructor.module.css";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -6,8 +6,8 @@ import {checkVerifyAuth} from "../../store/actions";
 import Authorization  from "../Auth";
 
 function Constructor() {
-    const [visibility, setVisibility] = React.useState("none")
-
+    const [visibility, setVisibility] = useState("none")
+    const [templatesList, rawTemplates] = useState([])
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(checkVerifyAuth())
@@ -17,16 +17,29 @@ function Constructor() {
 
     const handleOpenAuth = (e) => {
         e.preventDefault();
-        if(!access) setVisibility("flex")
+        if(!access) setVisibility("flex");
         console.log(access)
     };
 
-    const templateList = [
-        {id: 1, link: "http://grayscale.220-accentuation.co/", to: "/templates/grayscale"},
-        {id: 2, link: "http://grayscale.220-accentuation.co/", to: "/templates/grayscale"},
-        {id: 3, link: "http://grayscale.220-accentuation.co/", to: "/templates/grayscale"},
-    ]
-
+    useEffect(() => {
+        fetch("http://www.220-accentuation.co/api/constructor/templates/")
+            .then((response)=> {
+                if (!response.ok) throw response;
+                return response.json();
+            }).then((templates) => {
+            console.log(templates[0].constructor_link);
+            rawTemplates(templates)
+        }).catch((err) => {
+            if (typeof err.text === 'function') {
+                err.text().then(errorMessage => {
+                    console.log(errorMessage);
+                });
+            } else {
+                console.log(err)
+            }
+        })
+    }, [])
+    console.log(templatesList)
     return (
         <div className={style.mainCont}>
             <h2 className={style.h2}>
@@ -34,12 +47,15 @@ function Constructor() {
             </h2>
             <div className={style.templateCont}>
                 {
-                    templateList.map(t => (
-                        <div key={t.id} className={style.templateCellCont}>
+                    templatesList.map((t, index )=> (
+                        <div key={index} className={style.templateCellCont}>
                             {
                                 access
                                     ? <NavLink
-                                        to={t.to}
+                                        to={{
+                                            pathname: `/templates/constructor`,
+                                            templateProps: t.constructor_link
+                                        }}
                                         className={style.templateLink}
                                         exact={true}>
                                         go to edit template
@@ -49,7 +65,7 @@ function Constructor() {
                                     </a>
                             }
                             <iframe className={style.template}
-                                    src={t.link} frameBorder="0">
+                                    src={t.sample_link} frameBorder="0">
                             </iframe>
                         </div>
                     ))

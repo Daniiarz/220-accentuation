@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
         case "FAIL_REG":
             return {
                 ...state,
-                error: action.error,
+                error: true,
             };
         default:
             return state;

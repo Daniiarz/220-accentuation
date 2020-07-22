@@ -8,7 +8,6 @@ import {addLoginData, sendLoginPost, checkVerifyAuth} from "../../store/actions"
 function LoginAuth(prop) {
     const dispatch = useDispatch();
     const {email, password, fail} = useSelector(state => state.login);
-    // const verifyFail = useSelector(state => state.verifyAuth.fail)
 
     const [loginBtn, setDisableLogBtn] = useState(false);
     const [logPassword, setLogPass] = useState({display: "none", vis: "password"});
@@ -23,7 +22,7 @@ function LoginAuth(prop) {
         setTimeout(() => {
             setDisableLogBtn(false);
         }, 5000)
-        dispatch(sendLoginPost({email: email, password: password}));
+        dispatch(sendLoginPost({email: email, password: password}))
     }
 
     const handleChangeLogin = (e) => dispatch(addLoginData({name: e.target.name, data: e.target.value}));
