@@ -1,11 +1,8 @@
-import { combineReducers } from 'redux'
-import api from "./api";
-import logo from "./logo";
-import nav from "./nav";
-import body from "./body";
-import footer from "./footer";
-import readiness from "./readiness";
+import { combineReducers } from "redux";
+import verifyAuth from "./veryfiAuth";
+import login from "./login";
+import regis from "./regis";
 
 export default combineReducers({
-    api, logo, nav, body, footer, readiness
-})
+  verifyAuth, login, regis
+});

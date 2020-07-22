@@ -1,68 +1,63 @@
 import React from "react";
 import style from "./constructor.module.css";
-import {useSelector} from "react-redux";
-import Theme from "./theme";
-import Table from "./table";
+import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {checkVerifyAuth} from "../../store/actions";
+import Authorization  from "../Auth";
 
 function Constructor() {
-    const state = useSelector(state => state);
+    const [visibility, setVisibility] = React.useState("none")
 
-    const [bg, setBg] = React.useState({name: "color2",color:"#fff7b4"});
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(checkVerifyAuth())
+    }, []);
 
-    const sendingObj = {
-        meta: {
-          mainContStyle: bg
-        },
-        header: {
-            brandTittle: state.logo.logo.tittle,
-            menuOption1: state.nav.nav.menuOption1,
-            menuOption2: state.nav.nav.menuOption2,
-            menuOption3: state.nav.nav.menuOption3
-        },
-        body: {
-            bodyText1: state.body.body.text1,
-            bodyText2: state.body.body.text2,
-            bodyText3: state.body.body.text3,
-            bodyText4: state.body.body.text4,
-            bodyText5: state.body.body.text5,
-            bodyText6: state.body.body.text6,
-            bodyStyle: state.body.body.style
-        },
-        footer: {
-            address: state.footer.footer.address,
-            contacts: state.footer.footer.contacts,
-        }
-    };
+    const {access} = useSelector(state => state.verifyAuth);
 
-    const handleSend = (e) => {
-        console.log(sendingObj)
+    const handleOpenAuth = (e) => {
         e.preventDefault();
-        fetch('http://localhost:8080/page', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                sendingObj
-            }),
-        }).then((response => response.json()))
-            .then(json => {
-                console.log(json.text)
-            })
+        if(!access) setVisibility("flex")
+        console.log(access)
     };
+
+    const templateList = [
+        {id: 1, link: "http://grayscale.220-accentuation.co/", to: "/templates/grayscale"},
+        {id: 2, link: "http://grayscale.220-accentuation.co/", to: "/templates/grayscale"},
+        {id: 3, link: "http://grayscale.220-accentuation.co/", to: "/templates/grayscale"},
+    ]
 
     return (
         <div className={style.mainCont}>
             <h2 className={style.h2}>
-                Lorem ipsum dolor sit amet.
+                Select template that you like.
             </h2>
-            <div className={style.desc}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, rerum?
+            <div className={style.templateCont}>
+                {
+                    templateList.map(t => (
+                        <div key={t.id} className={style.templateCellCont}>
+                            {
+                                access
+                                    ? <NavLink
+                                        to={t.to}
+                                        className={style.templateLink}
+                                        exact={true}>
+                                        go to edit template
+                                    </NavLink>
+                                    : <a onClick={(e) => handleOpenAuth(e)} className={style.templateLink}>
+                                        go to edit template
+                                    </a>
+                            }
+                            <iframe className={style.template}
+                                    src={t.link} frameBorder="0">
+                            </iframe>
+                        </div>
+                    ))
+                }
             </div>
-            <div className={style.editor}>
-                <Theme onSave={setBg}/>
-                <Table onSave={{fun: handleSend, bg}}/>
-            </div>
+            <Authorization onClick={setVisibility} display={visibility}/>
         </div>
-    )
+    );
 }
 
 export default Constructor;
