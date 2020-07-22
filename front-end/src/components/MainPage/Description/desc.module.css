@@ -1,13 +1,16 @@
 .mainCont{
     height: 500px;
-    /*margin: 0 -150px;*/
-    padding: 0 150px;
-    background: url("../../../images/city-back.png") center / cover;
     font-family: var(--first-font);
     color: var(--fourth-color);
     text-align: center;
-    display: flex;
+    display: grid;
+    grid-template: 1fr 150px / 1fr;
     align-items: center;
+}
+
+.titleCont{
+    align-self: end;
+    background: rgba(0, 0, 0, 0.63);
 }
 
 
@@ -22,7 +25,7 @@
 
 @media (max-width: 1256px){
     .mainCont{
-        margin: 0 -100px;
+        margin: 0;
         padding: 0 100px;
     }
 
@@ -30,7 +33,7 @@
 @media (max-width: 998px){
     .mainCont{
         height: 350px;
-        margin: 0 -50px;
+        margin: 0;
         padding: 0 50px;
     }
     .h1{
@@ -43,7 +46,6 @@
 }
 @media (max-width: 768px){
     .mainCont{
-        margin: 0 -50px;
         padding: 0 50px;
     }
     .h1{
@@ -57,14 +59,15 @@
 
 @media (max-width: 576px){
     .mainCont{
-        margin: 0 -20px;
-        padding: 0 20px;
+        padding: 0;
     }
     .h1{
-        font-size: 36px;
+        font-size: 30px;
+        padding: 0 5px;
     }
 
     .p{
         font-size: 18px;
+        padding: 0 5px;
     }
 }

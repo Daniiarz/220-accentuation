@@ -1,6 +1,5 @@
 .mainCont{
-    height: 200px;
-    background: var(--first-color);
+    height: 800px;
     display: grid;
     grid-template: 80px 1fr / 100%;
     color: var(--fourth-color);

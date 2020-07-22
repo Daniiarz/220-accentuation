@@ -1,26 +1,19 @@
-import React from 'react';
-import {BrowserRouter, Route, Switch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainContent from "./pages/MainPage";
-import Body from "./components/Constructor/Body";
-import Logo from "./components/Constructor/Logo";
-import Nav from "./components/Constructor/Nav";
-import Footer from "./components/Constructor/Footer";
 import Constructor from "./pages/ConstructorPage";
-import { useSelector} from "react-redux";
+import Grayscale from "./templatePages/grayscale";
 
-function App() {
-    const id = useSelector(state => state.api.id);
+function App () {
   return (
-        <BrowserRouter basename="final-project">
-            <Switch>
-                    <Route path={"/"} component={MainContent} exact/>
-                    <Route path={`/${id}/body`} component={Body} exact/>
-                    <Route path={`/${id}/logo`} component={Logo} exact/>
-                    <Route path={`/${id}/nav`} component={Nav} exact/>
-                    <Route path={`/${id}/footer`} component={Footer} exact/>
-                    <Route path={`/${id}/constructor`} component={Constructor} exact/>
-            </Switch>
-        </BrowserRouter>
+    <BrowserRouter>
+      <Switch>
+        <Route path={"/"} component={MainContent} exact/>
+        <Route path={"/templates"} component={Constructor} exact/>
+        <Route path={"/templates/grayscale"} component={Grayscale} exact/>
+        <Route path={``} component={} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
