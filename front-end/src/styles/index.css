@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800&display=swap');
+@import "color.css";
+@import "font-size.css";
+@import "layout.css";
+@import "../components/atoms/SendBtn/send-btn.css";
+
+*{
+    box-sizing: border-box;
+}
+
+:root {
+    --first-font: 'Montserrat', sans-serif;
+
+    --first-color: #444444;
+    --second-color: #f9a480;
+    --third-color: #23afc8;
+    --fourth-color: #fdffff;
+
+    --greenText: #498b27;
+    --blackText: #2d2d2d;
+    --redText: #a01417;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+body{
+    min-height: 100vh;
+    margin: 0 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 1356px){
+    body{
+        display: grid;
+        grid-template: unset / 1870px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1256px){
+    body{
+        margin: 0 100px;
+    }
+}
+
+@media (max-width: 998px){
+    body{
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 576px){
+    body{
+        margin: 0 10px;
+    }
+}

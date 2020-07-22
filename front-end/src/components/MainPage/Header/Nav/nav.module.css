@@ -1,0 +1,37 @@
+.mainCont{
+    display: grid;
+    grid-template: 1fr / repeat(4, 1fr);
+    grid-column-gap: 15px;
+}
+
+.cell{}
+
+.link{
+    text-decoration: none;
+    color: var(--first-color);
+    font-family: var(--first-font);
+    font-size: 18px;
+}
+
+.active{
+    color: var(--second-color);
+}
+
+@media (max-width: 768px){
+    .mainCont{
+        grid-column-gap: 10px;
+    }
+    .link{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px){
+    .mainCont{
+        display: none;
+        /*grid-column-gap: 7px;*/
+    }
+    .link{
+        font-size: 14px;
+    }
+}

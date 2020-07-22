@@ -1,0 +1,40 @@
+.result{
+    height: 80%;
+    width: 100%;
+    display: grid;
+    grid-template: 1fr 100px / 1fr;
+    align-items: end;
+}
+
+.result p{
+    width: 100%;
+    text-align: center;
+    font-family: var(--first-font);
+    word-wrap: break-word;
+    margin: 0;
+}
+
+.inputs{
+    height: 60px;
+    padding: 0 20px;
+    align-self: center;
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    align-items: center;
+    background: var(--second-color);
+    justify-content: space-between;
+}
+
+.inputs input{
+    height: 40px;
+    font-family: var(--first-font);
+    width: 200px;
+    padding: 0 10px;
+    border: 2px solid var(--first-color);
+}
+
+@media(max-width: 1000px){
+    .result{
+        grid-template: 250px 150px / 1fr;
+    }
+}

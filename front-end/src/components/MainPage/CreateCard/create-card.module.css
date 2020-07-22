@@ -1,0 +1,52 @@
+.mainCont{
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardInput{
+}
+
+.p{
+    font-family: var(--first-font);
+    font-size: 22px;
+    color: var(--redText);
+    /*transform: scale();*/
+}
+
+.cardInput input{
+    height: 50px;
+    width: 300px;
+    font-family: var(--first-font);
+    font-size: 20px;
+    border: 0;
+    padding: 0 15px;
+    color: var(--blackText);
+    margin: 0 10px;
+    outline: none;
+    background: var(--fourth-color);
+}
+
+.link {
+    font-family: var(--first-font);
+    color: var(--first-color);
+    border-radius: 34px;
+    border: 2px solid var(--first-color);
+    transition: .1s ease-in-out;
+    text-decoration: none;
+    font-size: 42px;
+    padding: 10px 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.link b{
+    color: var(--second-color);
+}
+
+.link:hover{
+    background: var(--first-color);
+    color: var(--fourth-color);
+}

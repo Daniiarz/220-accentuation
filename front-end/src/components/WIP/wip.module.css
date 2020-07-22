@@ -1,0 +1,16 @@
+.mainCont {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--first-font);
+    font-size: 72px;
+    color: var(--first-color);
+}
+
+@media (max-width: 576px){
+    .mainCont{
+        font-size: 32px;
+    }
+}
