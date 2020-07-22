@@ -34,8 +34,8 @@ function Authorization(prop) {
                 </div>
                 {
                     switchAuth
-                        ? <LoginAuth onClick={handleSwitch}/>
-                        : <RegAuth onClick={handleSwitch}/>
+                        ? <LoginAuth  onClick={handleSwitch}/>
+                        : <RegAuth switch={setAuth} onClick={handleSwitch}/>
                 }
             </div>
             <div className={style.imageCont}>

@@ -59,6 +59,5 @@
     bottom: 0;
 }
 .templateCellCont:hover .template{
-    /*transform: scale(1.005);*/
     box-shadow: 0 6px 70px 0 rgba(171, 171, 171, 0.48);
 }
