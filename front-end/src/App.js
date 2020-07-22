@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainContent from "./pages/MainPage";
 import Constructor from "./pages/ConstructorPage";
-import Grayscale from "./templatePages/grayscale";
+import Template from "./templatePages/template";
 
 function App () {
   return (
@@ -10,8 +10,7 @@ function App () {
       <Switch>
         <Route path={"/"} component={MainContent} exact/>
         <Route path={"/templates"} component={Constructor} exact/>
-        <Route path={"/templates/grayscale"} component={Grayscale} exact/>
-        <Route path={``} component={} />
+        <Route path={"/templates/constructor"} component={Template} exact/>
       </Switch>
     </BrowserRouter>
   );

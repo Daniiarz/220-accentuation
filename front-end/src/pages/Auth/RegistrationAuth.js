@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import style from "./auth.module.css";
 import visible from "../../images/visible.png";
 import hide from "../../images/hide.png";
@@ -7,7 +7,7 @@ import {addRegData, sendRegPost} from "../../store/actions";
 
 function RegAuth(prop) {
     const dispatch = useDispatch();
-    const {first_name, last_name, email, password, success} = useSelector(state => state.regis)
+    const {first_name, last_name, email, password, success, error} = useSelector(state => state.regis)
     const [regPassword1, setRegPass1] = useState({display: "none", vis: "password"});
     const [regPassword2, setRegPass2] = useState({display: "none", vis: "password"});
     const [passText1, setPassText1] = useState("");
@@ -21,6 +21,13 @@ function RegAuth(prop) {
         }));
     }
 
+    useEffect(() => {
+        if (success)prop.switch(true)
+    }, [success])
+    useEffect(() => {
+        if (error===true) setErrorText("this password is too common.")
+    }, [error])
+
     const handleRegistration = (e) => {
         e.preventDefault();
         if(passText1 !== password) {
@@ -30,9 +37,10 @@ function RegAuth(prop) {
             setDisableRegBtn(true);
             setTimeout(() => {
                 setDisableRegBtn(false);
-                if (success) prop.onClick(true)
             }, 4000);
-            dispatch(sendRegPost({first_name:first_name ,last_name:last_name ,email: email, password: password}));
+            dispatch(
+                sendRegPost({first_name:first_name ,last_name:last_name ,email: email, password: password})
+            )
         }
     }
 
