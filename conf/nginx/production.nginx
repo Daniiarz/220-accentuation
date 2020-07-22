@@ -2,6 +2,10 @@ upstream api {
   server backend:8000;
 }
 
+upstream front {
+  server front-end:80;
+}
+
 upstream sites {
   server sites-nginx:80;
 }
@@ -17,16 +21,16 @@ server {
   server_name 220-accentuation.co www.220-accentuation.co;
   server_tokens on;
 
-  location / {
-    proxy_set_header Host $http_host;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-
-    proxy_buffering off;
-    proxy_redirect off;
-    proxy_pass_request_headers on;
+  location ~ ^/(api|admin) {
+    include proxy_conf.nginx;
 
     proxy_pass http://api;
+  }
+
+  location / {
+    include proxy_conf.nginx;
+
+    proxy_pass http://front;
   }
 
   location /media/ {

@@ -60,9 +60,13 @@ def create_static_site(validated_data, title, template_name, specific_data, user
 def delete_user_created_site(site_name, domain_id, template_name):
     slug_title = slugify(site_name.lower())
     site_dir = fr'/usr/src/sites/{slug_title}'
-    media_dir = fr'/user/src/back-end/media/sites/{template_name}/{slug_title}'
-    shutil.rmtree(site_dir)
-    shutil.rmtree(media_dir)
+    media_dir = fr'/usr/src/back-end/media/sites/{template_name}/{slug_title}'
+
+    if os.path.exists(site_dir):
+        shutil.rmtree(site_dir)
+
+    if os.path.exists(media_dir):
+        shutil.rmtree(media_dir)
 
     with open("/usr/src/conf/sites.nginx", "r") as inf:
         sites_config = list(inf.readlines())

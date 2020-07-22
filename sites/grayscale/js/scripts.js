@@ -229,7 +229,7 @@ sendBtn.addEventListener("click", () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk2MTc2NjI1LCJqdGkiOiI2MWI2ZTFjNzcyZWY0OTJmYmIyZjcxNzk4Y2FhNjcxMyIsInVzZXJfaWQiOjF9.DdCOOBxmeryBX0ZR1EqEkENGWkfP-qzeMwOHfit6A2Q`,
+                'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
             },
             body: JSON.stringify({
                 title: sendObj.brandText
@@ -286,7 +286,7 @@ modalCreateBtn.addEventListener("click", async function () {
     fetch("http://www.220-accentuation.co/api/constructor/", {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk2MTc2NjI1LCJqdGkiOiI2MWI2ZTFjNzcyZWY0OTJmYmIyZjcxNzk4Y2FhNjcxMyIsInVzZXJfaWQiOjF9.DdCOOBxmeryBX0ZR1EqEkENGWkfP-qzeMwOHfit6A2Q`
+            'Authorization': `Bearer ${window.localStorage.getItem('token')}`
         },
         body: formData
     }).then(response => {
