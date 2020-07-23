@@ -89,8 +89,8 @@ function RegAuth(prop) {
                          src={hide} alt=""/>
                 </div>
             </div>
-            <p className={style.error}>{errorText}</p>
             <button disabled={regBtn} onClick={e => handleRegistration(e)} className={style.login}>registration</button>
+            <p className={style.error}>{errorText}</p>
             <button onClick={(e) => prop.onClick(e, true)} className={style.switch}>Has an account?</button>
         </div>
     )

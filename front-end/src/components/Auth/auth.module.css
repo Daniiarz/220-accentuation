@@ -2,6 +2,8 @@
     width: 50%;
     height: 550px;
     position: fixed;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 1fr;
     left: 50%;
     margin-left: -25%;
     top: 50%;
@@ -32,7 +34,7 @@
 
 .titleCont{
     height: 100%;
-    width: 60%;
+    width: 100%;
     display: grid;
     grid-template-rows: 20% 80%;
     flex-direction: column;
@@ -50,7 +52,7 @@
 
 .fieldCont{
     display: grid;
-    grid-template-rows: 60% 5% 25% 10%;
+    grid-template-rows: 60% 25% 5% 10%;
     justify-content: center;
 }
 
@@ -61,7 +63,6 @@
 }
 
 .fields input{
-    height: 50px;
     font-family: var(--first-font);
     font-size: 18px;
     margin: 7px 0;
@@ -116,7 +117,7 @@
 
 .imageCont{
     height: 100%;
-    width: 40%;
+    width: 100%;
 }
 
 .img{
@@ -132,4 +133,83 @@
     justify-self: center;
     align-self: start;
     margin: 0;
+}
+
+@media(max-width: 1008px){
+    .mainCont{
+        width: 70%;
+        height: 550px;
+        position: fixed;
+        left: 50%;
+        margin-left: -35%;
+        top: 50%;
+        margin-top: -225px;
+        border-radius: 5px;
+        background: var(--fourth-color);
+        box-shadow: 0 14px 20px 0 #333;
+        z-index: 3;
+    }
+}
+@media(max-width: 756px){
+    .mainCont{
+        width: 90%;
+        height: 550px;
+        margin-left: -45%;
+        margin-top: -275px;
+        display: grid;
+        grid-template-rows: .3fr 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "ph" "te";
+    }
+    .imageCont{
+        grid-area: ph;
+        height: 137px;
+        width: 100%;
+    }
+    .titleCont{
+        grid-area: te;
+    }
+
+    .titleCont{
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 15% 85%;
+        flex-direction: column;
+    }
+    .h3{
+        align-self: center;
+        margin: 0;
+    }
+
+    .fieldCont{
+        display: grid;
+        grid-template-rows: 70% 10% 10% 10%;
+        justify-content: center;
+    }
+
+    .fields input{
+        font-family: var(--first-font);
+        font-size: 18px;
+        margin: 2px 0;
+
+    }
+    .password{
+        height: unset;
+        width: 100%;
+        display: flex;
+        margin: 2px 0;
+    }
+
+    .login{
+        height: 90%;
+        align-self: center;
+    }
+
+    .error{
+        align-self: center;
+    }
+    .switch{
+        align-self: center;
+    }
 }

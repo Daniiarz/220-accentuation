@@ -51,8 +51,8 @@ function LoginAuth(prop) {
                          src={hide} alt=""/>
                 </div>
             </div>
-            <p className={style.error}>{fail === 401 ? "wrong login or password" : ""}</p>
             <button disabled={loginBtn} onClick={e => handleLogin(e)} className={style.login}>login</button>
+            <p className={style.error}>{fail === 401 ? "wrong login or password" : ""}</p>
             <button onClick={(e) => prop.onClick(e, false)} className={style.switch}>Create account?
             </button>
         </div>
