@@ -81,7 +81,7 @@ const aboutImg2 = document.getElementById("aboutInputFile2");
 const aboutImg3 = document.getElementById("aboutInputFile3");
 const modalWinText = document.getElementById("modalWinText");
 
-console.log(window.localStorage.getItem('token'));
+console.log(document.cookie)
 
 const inputList = [
     brandText,
@@ -167,7 +167,6 @@ inputList.forEach((input) => {
                 i.target.files = ""
             }
             sendObj.aboutImg1 = i.target.files[0];
-            console.log(sendObj)
             reader1.onload = () => {
                 aboutImage1.setAttribute("src", `${reader1.result}`);
                 uploader1.style.color = "#fd7e14";
@@ -289,8 +288,7 @@ sendBtn.addEventListener("click", () => {
         modalCont.appendChild(modalBody);
     }
 });
-modalCreateBtn.addEventListener("click", async function () {
-    console.log(sendObj)
+    modalCreateBtn.addEventListener("click", async function () {
     let formData = new FormData();
 
     formData.append('brandText', sendObj.brandText);
