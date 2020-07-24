@@ -257,7 +257,7 @@ sendBtn.addEventListener("click", () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
+                'Authorization': `Bearer ${document.cookie}`,
             },
             body: JSON.stringify({
                 title: sendObj.brandText
@@ -314,7 +314,7 @@ modalCreateBtn.addEventListener("click", async function () {
     fetch("http://www.220-accentuation.co/api/constructor/", {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+            'Authorization': `Bearer ${document.cookie}`
         },
         body: formData
     }).then(response => {
