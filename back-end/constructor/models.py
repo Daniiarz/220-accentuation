@@ -11,6 +11,7 @@ class Site(models.Model):
     template_name = models.CharField(max_length=100)
     creator = models.ForeignKey(get_user_model(),
                                 on_delete=models.CASCADE, related_name="sites", null=True)
+    link = models.CharField(max_length=225, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

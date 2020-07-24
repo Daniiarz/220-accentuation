@@ -12,6 +12,7 @@ class SiteSerializer(serializers.ModelSerializer):
         model = Site
         fields = (
             "name",
+            "link",
             "created"
         )
 
