@@ -76,9 +76,10 @@ const address = document.getElementById("address");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const mastheadInputFile = document.getElementById("mastheadInputFile");
-const aboutImg1 = document.getElementById("aboutImg1");
-const aboutImg2 = document.getElementById("aboutImg2");
-const aboutImg3 = document.getElementById("aboutImg3");
+const aboutImg1 = document.getElementById("aboutInputFile1");
+const aboutImg2 = document.getElementById("aboutInputFile2");
+const aboutImg3 = document.getElementById("aboutInputFile3");
+const modalWinText = document.getElementById("modalWinText");
 
 const inputList = [
     brandText,
@@ -111,6 +112,7 @@ const checkFills = () => {
         return e.value === ""
     })
     if (emptyString) {
+        modalWinText.textContent = "Fill in all the fields"
         modalWin.style.left = "0";
         return false
     } else {
@@ -131,11 +133,11 @@ const sendObj = {
     address: ``,
     email: ``,
     phone: ``,
-    mastheadImg: ``,
+    mastheadImg: {},
     mastheadColor: `#B3B3B3`,
-    aboutImg1: ``,
-    aboutImg2: ``,
-    aboutImg3: ``,
+    aboutImg1: {},
+    aboutImg2: {},
+    aboutImg3: {},
 };
 
 const modalBody = createElement("div", "class", "modalBody", null, null);
@@ -154,26 +156,42 @@ const modalCreateBtn = createElement("button", "class", "modalCreateBtn", null, 
 
 inputList.forEach((input) => {
     input.addEventListener("input", (i) => {
-        if (i.originalTarget.id === "aboutImg1") {
+        if (i.originalTarget.id === "aboutInputFile1") {
             const reader1 = new FileReader();
             reader1.readAsDataURL(i.target.files[0]);
+            if (i.target.files[0].size > 256000) {
+                modalWinText.textContent = "File is too big!"
+                modalWin.style.left = "0";
+                i.target.files = ""
+            }
             sendObj.aboutImg1 = i.target.files[0];
-            reader1.onload= () => {
+            console.log(sendObj)
+            reader1.onload = () => {
                 aboutImage1.setAttribute("src", `${reader1.result}`);
                 uploader1.style.color = "#fd7e14";
             }
         }
-        if (i.originalTarget.id === "aboutImg2") {
+        if (i.originalTarget.id === "aboutInputFile2") {
             const reader2 = new FileReader();
             reader2.readAsDataURL(i.target.files[0]);
+            if (i.target.files[0].size > 256000) {
+                modalWinText.textContent = "File is too big!"
+                modalWin.style.left = "0";
+                i.target.files = ""
+            }
             sendObj.aboutImg2 = i.target.files[0];
             reader2.onload = () => {
                 aboutImage2.setAttribute("src", `${reader2.result}`)
                 uploader2.style.color = "#fd7e14";
             }
         }
-        if (i.originalTarget.id === "aboutImg3") {
+        if (i.originalTarget.id === "aboutInputFile3") {
             const reader3 = new FileReader();
+            if (i.target.files[0].size > 256000) {
+                modalWinText.textContent = "File is too big!"
+                modalWin.style.left = "0";
+                i.target.files = ""
+            }
             sendObj.aboutImg3 = i.target.files[0];
             reader3.readAsDataURL(i.target.files[0]);
             reader3.onload = () => {
@@ -182,12 +200,16 @@ inputList.forEach((input) => {
             }
         }
         if (i.originalTarget.id === "mastheadInputFile") {
-            const reader = new FileReader();
+            const reader4 = new FileReader();
+            if (i.target.files[0].size > 256000) {
+                modalWinText.textContent = "File is too big!"
+                modalWin.style.left = "0";
+                i.target.files = ""
+            }
             sendObj.mastheadImg = i.target.files[0];
-            console.log(i.originalTarget.id, i.target.files[0])
-            reader.readAsDataURL(i.target.files[0]);
-            reader.onload = () => {
-                masthead.style.backgroundImage = `url("${reader.result}")`;
+            reader4.readAsDataURL(i.target.files[0]);
+            reader4.onload = () => {
+                masthead.style.backgroundImage = `url("${reader4.result}")`;
             }
         }
         if (i.originalTarget.id === "brandText") {

@@ -57,7 +57,8 @@
     </nav>
     <!-- Masthead-->
     <header class="masthead" style="overflow: hidden">
-        <label class="uploaderLabel mastheadUploaderLabel d-flex flex-column align-items-center" for="mastheadInputFile">
+        <label class="uploaderLabel mastheadUploaderLabel d-flex flex-column align-items-center"
+               for="mastheadInputFile">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="mastheadUploader bi bi-download"
                  fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +70,7 @@
             </svg>
             upload your image
         </label>
-        <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
+        <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="512000" typeof=""
                class="mastheadInputFile" id="mastheadInputFile">
         <div class="container overflow-hidden d-flex h-100 align-items-center p-0">
             <div class="mx-auto text-center d-flex flex-column">
@@ -92,8 +93,7 @@
             <!-- Featured Project Row-->
             <div class="about-mini-cont row align-items-center no-gutters mb-4 mb-lg-5">
                 <div class="col-xl-8 col-lg-7 about-upload-cont">
-                    <!--                    <img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt=""/>-->
-                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutImg1">
+                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutInputFile1">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="uploader1 bi bi-download"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -105,25 +105,26 @@
                         </svg>
                         upload your image
                     </label>
-                    <img src="assets/img/bg-masthead.jpg"  class="aboutImage1"
+                    <img src="assets/img/bg-masthead.jpg" class="aboutImage1"
                          alt="">
                     <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
-                           class="uploadImage" id="aboutImg1">
+                           class="uploadImage" id="aboutInputFile1">
                 </div>
                 <div class="col-xl-4 col-lg-5"><label>
-                            <input placeholder="Type your text" id="aboutText1" type="text">
-                        </label>
-                        <label>
+                    <input placeholder="Type your text" id="aboutText1" type="text">
+                </label>
+                    <label>
                         <textarea placeholder="Type your text" class="text-black-50 mb-0" id="aboutDesc1"
                                   cols="30" rows="10"></textarea>
-                        </label>
-                    </div>
+                    </label>
                 </div>
             </div>
-            <!-- Project One Row-->
-            <div class="about-mini-cont row justify-content-center no-gutters mb-5 mb-lg-0">
+        </div>
+        <!-- Project One Row-->
+        <div class="container">
+            <div class="about-mini-cont row align-items-center no-gutters">
                 <div class="col-lg-6  about-upload-cont">
-                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutImg2">
+                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutInputFile2">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="uploader2 bi bi-download"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +139,7 @@
                     <img src="assets/img/demo-image-01.jpg" class="aboutImage2"
                          alt="">
                     <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
-                           class="text-black-50 uploadImage" id="aboutImg2">
+                           class="text-black-50 uploadImage" id="aboutInputFile2">
                 </div>
                 <div class="col-lg-6">
                     <div class="text-center h-100 project">
@@ -157,10 +158,12 @@
                     </div>
                 </div>
             </div>
-            <!-- Project Two Row-->
-            <div class="about-mini-cont row justify-content-center no-gutters">
+        </div>
+        <!-- Project Two Row-->
+        <div class="container">
+            <div class="about-mini-cont row align-items-center no-gutters mb-4 mb-lg-5">
                 <div class="col-lg-6 about-upload-cont">
-                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutImg3">
+                    <label class="uploaderLabel d-flex flex-column align-items-center" for="aboutInputFile3">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="uploader3 bi bi-download"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -172,10 +175,10 @@
                         </svg>
                         upload your image
                     </label>
-                    <img  src="assets/img/demo-image-02.jpg" class="aboutImage3"
+                    <img src="assets/img/demo-image-02.jpg" class="aboutImage3"
                          alt="">
                     <input style="display: none" type="file" accept=".png, .jpg, .jpeg" size="5e+6" typeof=""
-                           class="uploadImage" id="aboutImg3">
+                           class="uploadImage" id="aboutInputFile3">
                 </div>
                 <div class="col-lg-6 order-lg-first">
                     <div class="text-center h-100 project">
@@ -245,8 +248,8 @@
         <button id="send-btn">Create page</button>
     </div>
     <div id="modalWin">
-        <p>
-            Fill in all the fields
+        <p id="modalWinText">
+
         </p>
         <button id="modalWinBtn">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"

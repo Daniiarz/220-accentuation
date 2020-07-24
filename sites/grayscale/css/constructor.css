@@ -180,7 +180,6 @@
     width: inherit;
     object-fit: cover;
     height: 100%;
-    z-index: 1;
 }
 
 .contactsH4 {
@@ -423,6 +422,16 @@
     cursor: pointer;
     z-index: 99999999;
     font-size: 28px;
+}
+
+@media(max-width: 576px){
+    #loadingWin_h3 {
+        font-size: 24px;
+    }
+
+    .pageLink {
+        font-size: 16px;
+    }
 }
 
 .pageLink:hover {
