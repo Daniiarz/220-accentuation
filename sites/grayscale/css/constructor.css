@@ -157,14 +157,24 @@
 
 .mastheadUploaderLabel {
     position: absolute;
-    top: 550px;
+    top: 650px;
     width: 100%;
     color: inherit;
 }
 
+@media(max-width: 988px) {
+    .mastheadUploaderLabel {
+        top: 500px;
+    }
+}
+@media(max-width: 768px) {
+    .mastheadUploaderLabel {
+        top: 450px;
+    }
+}
 @media(max-width: 576px) {
     .mastheadUploaderLabel {
-        top: 350px;
+        top: 400px;
     }
 }
 

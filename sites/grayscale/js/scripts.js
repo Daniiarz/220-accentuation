@@ -81,6 +81,8 @@ const aboutImg2 = document.getElementById("aboutInputFile2");
 const aboutImg3 = document.getElementById("aboutInputFile3");
 const modalWinText = document.getElementById("modalWinText");
 
+console.log(window.localStorage.getItem('token'));
+
 const inputList = [
     brandText,
     homeText,
