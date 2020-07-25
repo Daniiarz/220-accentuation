@@ -81,6 +81,8 @@ const aboutImg2 = document.getElementById("aboutInputFile2");
 const aboutImg3 = document.getElementById("aboutInputFile3");
 const modalWinText = document.getElementById("modalWinText");
 
+console.log(window.localStorage.getItem('token'));
+
 const inputList = [
     brandText,
     homeText,
@@ -100,14 +102,25 @@ const inputList = [
     aboutImg3,
 ];
 
-const getToken = function () {
-    window.addEventListener("message", function(event) {
-        if (event.origin !== 'http://localhost:3000')  return;
-
-        console.log(event);
-        return event.data
-    });
+function listener(event){
+    console.log(event);
+    sendObj.token = event.data;
 }
+if (window.addEventListener) {
+    window.addEventListener("message", listener,false);
+}
+// window.addEventListener("message", function(event) {
+//     if (event.origin != 'http://javascript.info') {
+//         console.log(event)
+//         return;
+//     }
+//     console.log(event)
+// });
+// const getToken = function () {
+//     window.addEventListener('message', function(event) {
+//         alert(`Получено ${event.data} из ${event.origin}`);
+//     });
+// }
 
 const checkFills = () => {
     const emptyString = inputList.find(e => {
@@ -124,7 +137,8 @@ const checkFills = () => {
         modalWinText.textContent = "Fill in all the fields"
         modalWin.style.left = "0";
         return false
-    } else {
+
+ } else {
         return true
     }
 };
@@ -147,6 +161,7 @@ const sendObj = {
     aboutImg1: {},
     aboutImg2: {},
     aboutImg3: {},
+    token: ``,
 };
 
 const modalBody = createElement("div", "class", "modalBody", null, null);
@@ -263,7 +278,7 @@ sendBtn.addEventListener("click", () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${getToken()}`,
+                'Authorization': `Bearer ${sendObj.token}`,
             },
             body: JSON.stringify({
                 title: sendObj.brandText
@@ -319,7 +334,7 @@ sendBtn.addEventListener("click", () => {
     fetch("http://www.220-accentuation.co/api/constructor/", {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${getToken()}`
+            'Authorization': `Bearer ${sendObj.token}`
         },
         body: formData
     }).then(response => {
