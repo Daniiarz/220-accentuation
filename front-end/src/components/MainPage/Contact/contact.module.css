@@ -1,105 +1,180 @@
-.mainCont{
-    height: 800px;
+.mainCont {
+    height: 650px;
     display: grid;
     grid-template: 80px 1fr / 100%;
+    grid-row-gap: 20px;
     color: var(--fourth-color);
     font-family: var(--first-font);
+    padding: 130px 150px 0;
+    overflow: hidden;
 }
 
-.mainCont b{
+.h2 {
+    font-family: var(--first-font);
+    color: var(--fourth-color);
+    font-size: 48px;
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+}
+
+.mainCont b {
     color: var(--second-color);
 }
 
-.h2{
-    font-family: var(--first-font);
-    color: var(--fourth-color);
-    font-size: 30px;
-    align-self: center;
-    justify-self: center;
-    margin: 0;
-}
-
-.table{
+.cont {
     display: grid;
-    grid-template: 1fr / 1fr 1fr;
+    grid-template: 1fr 1fr / 1fr 1fr 1fr;
+    grid-column-gap: 50px;
+    grid-template-areas: "text front front" "text back back";
 }
 
-.cell{
-    align-self: center;
+.front, .back {
     justify-self: center;
+    width: 100%;
+    display: grid;
+    grid-template: 1fr / 30% 25% 15% 15% 15%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text {
+    grid-area: text;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
 }
 
-.h3{
-    margin: 0 0 10px;
+.text h4 {
+    font-size: 28px;
+    text-align: start;
 }
 
-.title{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-row-gap: 10px;
+.text p {
+    font-size: 24px;
 }
 
-.p{
-    margin: 0;
+.front {
+    grid-area: front;
 }
 
-@media (max-width: 998px){
+.back {
+    grid-area: back;
+}
+
+.h3 {
+    font-size: 30px;
+}
+
+.p {
+    font-size: 24px;
+}
+
+.link {
+    height: 40px;
+    text-decoration: none;
+    outline: none;
+    color: white;
+    justify-self: center;
+}
+
+.link img {
+    height: 40px;
+}
+
+@media (max-width: 1208px) {
     .mainCont {
-        height: 200px;
-        background: var(--first-color);
+        padding: 130px 50px 0;
     }
-    .h2{
+    .h3{
+        font-size: 26px;
+    }
+    .p{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1008px) {
+    .mainCont {
+        height: 700px;
+        padding: 130px 10px 0;
+    }
+    .h2 {
+        font-size: 42px;
+    }
+    .cont {
+        grid-column-gap: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .mainCont{
+        padding: 0 5px 0;
+    }
+    .h2 {
+        font-size: 34px;
+    }
+
+    .cont{
+        grid-template: 1fr 1fr 1fr / 1fr;
+        grid-column-gap: 50px;
+        grid-template-areas: "text " "front" "back";
+    }
+}
+
+@media (max-width: 756px) {
+    .mainCont{
+        padding: 0 5px 0;
+    }
+    .h2 {
         font-size: 28px;
     }
 
+    .cont{
+        grid-template: 1fr 1fr 1fr / 1fr;
+        grid-column-gap: 50px;
+        grid-template-areas: "text " "front" "back";
+    }
     .h3{
-        font-size: 20px;
+        font-size: 22px;
     }
-
     .p{
-        font-size: 16px;
+        font-size: 18px;
     }
+    .link img {
+         height: 35px;
+     }
 }
-@media (max-width: 768px){
-    .mainCont {
-        height: 200px;
-        background: var(--first-color);
+@media (max-width: 568px) {
+    .mainCont{
+        height: 680px;
     }
-    .h2{
-        font-size: 24px;
+    .h2 {
+        font-size: 28px;
     }
-
+    .cont{
+        grid-template: 1fr .7fr .7fr / 1fr;
+        grid-column-gap: 50px;
+        grid-template-areas: "text " "front" "back";
+    }
+    .front, .back {
+        grid-template: 1fr 1fr / 33.3% 33.3% 33.3%;
+        grid-template-areas: "h3 h3 p" "... ... ...";
+        justify-content: space-between;
+        align-items: center;
+    }
     .h3{
-        font-size: 16px;
+        grid-area: h3;
+        font-size: 22px;
     }
-    .title{
-        grid-row-gap: 8px;
-    }
-
     .p{
-        font-size: 14px;
+        grid-area: p;
+        font-size: 18px;
     }
-}
-
-@media (max-width: 576px){
-    .mainCont {
-        height: 160px;
-        background: var(--first-color);
-    }
-    .h2{
-        font-size: 20px;
-    }
-
-    .title{
-        grid-row-gap: 5px;
-    }
-
-    .p{
-        font-size: 13px;
-    }
+    .link img {
+         height: 35px;
+     }
 }
 

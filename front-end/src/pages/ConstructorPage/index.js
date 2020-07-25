@@ -3,7 +3,8 @@ import style from "./constructor.module.css";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {checkVerifyAuth} from "../../store/actions";
-import Authorization  from "../Auth";
+import Authorization  from "../../components/Auth";
+import back from "../../images/back.png"
 
 function Constructor() {
     const [visibility, setVisibility] = useState("none")
@@ -17,8 +18,7 @@ function Constructor() {
 
     const handleOpenAuth = (e) => {
         e.preventDefault();
-        if(!access) setVisibility("flex");
-        console.log(access)
+        if(!access) setVisibility("grid");
     };
 
     useEffect(() => {
@@ -39,10 +39,10 @@ function Constructor() {
             }
         })
     }, [])
-    console.log(templatesList)
     return (
         <div className={style.mainCont}>
             <h2 className={style.h2}>
+                <NavLink className={style.backLink} to={"/"} exact={true}><img src={back} alt=""/></NavLink>
                 Select template that you like.
             </h2>
             <div className={style.templateCont}>
@@ -54,7 +54,7 @@ function Constructor() {
                                     ? <NavLink
                                         to={{
                                             pathname: `/templates/constructor`,
-                                            templateProps: t.constructor_link
+                                            templateProps: t.constructor_link,
                                         }}
                                         className={style.templateLink}
                                         exact={true}>
@@ -64,8 +64,7 @@ function Constructor() {
                                         go to edit template
                                     </a>
                             }
-                            <iframe className={style.template}
-                                    src={t.sample_link} frameBorder="0">
+                            <iframe className={style.template} src={t.sample_link} frameBorder="0">
                             </iframe>
                         </div>
                     ))

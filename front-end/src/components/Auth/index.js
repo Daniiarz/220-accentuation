@@ -27,11 +27,9 @@ function Authorization(prop) {
     return (
         <div className={style.mainCont} style={{display: `${prop.display}`}}>
             <div className={style.titleCont}>
-                <div className={style.title}>
                     <h3 className={style.h3}>
-                        Build your own <br/> site <b>now.</b>
+                        Build your own site <b>now.</b>
                     </h3>
-                </div>
                 {
                     switchAuth
                         ? <LoginAuth  onClick={handleSwitch}/>

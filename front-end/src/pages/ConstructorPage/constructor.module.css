@@ -2,17 +2,21 @@
     padding: 50px 0;
 }
 
-.logo{
-    width: 100%;
-    justify-self: start;
-}
-
 .h2{
+    position: relative;
    font-family: var(--first-font);
     font-size: 48px;
     text-align: center;
     margin: 0 0 50px 0;
     cursor: default;
+    padding: 0 35px;
+}
+
+.backLink {
+    position: absolute;
+    left: 158px;
+    text-decoration: none;
+    outline: none;
 }
 
 .templateCont{
@@ -27,6 +31,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: 0 150px;
 }
 
 .templateLink{
@@ -51,7 +56,7 @@
 .template{
     justify-self: center;
     height: 350px;
-    width: 80%;
+    width: 100%;
     transition: .1s ease-in-out;
 }
 
@@ -60,4 +65,37 @@
 }
 .templateCellCont:hover .template{
     box-shadow: 0 6px 70px 0 rgba(171, 171, 171, 0.48);
+}
+.backLink img{
+    width: 30px;
+}
+
+@media (max-width: 756px) {
+    .h2{
+        font-size: 38px;
+    }
+}
+@media (max-width: 568px) {
+    .h2{
+        font-size: 32px;
+    }
+    .backLink img{
+        width: 20px;
+    }
+}
+@media(max-width: 1208px){
+    .backLink {
+        left: 57px;
+    }
+    .templateCellCont{
+        padding:  0 50px;
+     }
+}
+@media(max-width: 1008px){
+    .backLink {
+        left: 17px;
+    }
+    .templateCellCont{
+        padding: 0 10px;
+    }
 }

@@ -7,7 +7,7 @@ import About from "../../components/MainPage/About";
 
 function MainContent () {
   return (
-    <div className={style.mainCont}>
+    <div>
       <div className={style.header}>
         <Head/>
         <Desc/>
