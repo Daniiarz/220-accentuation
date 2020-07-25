@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainContent from "./pages/MainPage";
 import Constructor from "./pages/ConstructorPage";
-import Template from "./templatePages/template";
+import Template from "./pages/templatePages/template";
 import Profile from "./pages/Profile";
 
 function App () {

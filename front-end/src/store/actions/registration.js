@@ -15,6 +15,7 @@ export const sendRegPost = (body) => (dispatch) => {
             if (typeof accessFail.text === 'function') {
                 accessFail.text().then(errorMessage => {
                     dispatch({type: 'FAIL_REG', error: true})
+                    console.log(errorMessage)
                 });
             } else {
                 console.log(accessFail)

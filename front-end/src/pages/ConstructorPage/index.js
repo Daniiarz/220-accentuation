@@ -39,7 +39,6 @@ function Constructor() {
             }
         })
     }, [])
-    console.log(templatesList)
     return (
         <div className={style.mainCont}>
             <h2 className={style.h2}>
@@ -55,7 +54,7 @@ function Constructor() {
                                     ? <NavLink
                                         to={{
                                             pathname: `/templates/constructor`,
-                                            templateProps: t.constructor_link
+                                            templateProps: t.constructor_link,
                                         }}
                                         className={style.templateLink}
                                         exact={true}>
@@ -65,8 +64,7 @@ function Constructor() {
                                         go to edit template
                                     </a>
                             }
-                            <iframe className={style.template}
-                                    src={t.sample_link} frameBorder="0">
+                            <iframe className={style.template} src={t.sample_link} frameBorder="0">
                             </iframe>
                         </div>
                     ))

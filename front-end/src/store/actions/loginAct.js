@@ -15,8 +15,9 @@ export const sendLoginPost = (body) => (dispatch) => {
         checkResponse(response, 'Ошибка загрузки'))
         .then((data) => {
             dispatch({type: 'ADD_ACCESS_TOKEN', access: data.access, refresh: data.refresh})
-            window.localStorage.setItem("token", data.access)
+            document.cookie = `access_token = ${data.access}`
             window.localStorage.setItem("refresh", data.refresh)
+            window.localStorage.setItem("token", data.access)
             console.log(data)
         })
         .catch((accessFail) => {

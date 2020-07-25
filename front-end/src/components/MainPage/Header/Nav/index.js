@@ -5,8 +5,8 @@ import {NavLink} from "react-router-dom";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import NavDropdown from "react-bootstrap/cjs/NavDropdown";
 import Nav from "react-bootstrap/cjs/Nav";
-import {useSelector, useDispatch} from "react-redux";
-import {checkVerifyAuth, getProfile} from "../../../../store/actions";
+import {useDispatch, useSelector} from "react-redux";
+import {checkVerifyAuth} from "../../../../store/actions";
 import Authorization from "../../../Auth";
 
 function Navv() {
@@ -14,14 +14,11 @@ function Navv() {
     const access = useSelector(state => state.verifyAuth.access);
     React.useEffect(() => {
         dispatch(checkVerifyAuth());
-        dispatch(getProfile());
-
     }, [access]);
     const [visibility, setVisibility] = useState("none");
     const handleOpenAuth = (e) => {
         e.preventDefault();
         if (!access) setVisibility("grid");
-
     };
 
     const scrollToContact = () => {
@@ -71,16 +68,17 @@ function Navv() {
                                     } id="collasible-nav-dropdown">
                                         {(
                                             navArray.map((c) =>
-                                                (<NavLink
-                                                    key={c.id}
-                                                    to={c.to}
-                                                    className={style.cell}
-                                                    exact={true}>
-                                                    <Navbar bg="light" expand="lg">z
-                                                        <NavDropdown.Item onClick={c.onclick}
-                                                                          className={style.link}>{c.text}</NavDropdown.Item>
-                                                    </Navbar>
-                                                </NavLink>)
+                                                (<Navbar key={c.id} bg="light" expand="lg">
+                                                    <NavDropdown.Item
+                                                        onClick={c.onclick} className={style.link}>
+                                                        <NavLink
+                                                            to={c.to}
+                                                            className={style.cell}
+                                                            exact={true}>
+                                                            {c.text}
+                                                        </NavLink>
+                                                    </NavDropdown.Item>
+                                                </Navbar>)
                                             )
                                         )}
                                     </NavDropdown>

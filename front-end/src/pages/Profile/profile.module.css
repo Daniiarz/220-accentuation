@@ -85,7 +85,46 @@
     }
 }
 @media(max-width: 1008px){
-    .header, .sitesCont{
+    .header, .sitesCont, .ms{
         padding: 0 10px;
     }
+    .name{
+        font-size: 32px;
+    }
+    .slogan{
+        font-size: 24px;
+    }
+
+}
+@media(max-width: 576px){
+    .mainCont{
+        min-height: 100vh;
+        display: grid;
+        grid-template: 80px 150px 32px 1fr / 1fr 1fr;
+        grid-template-areas: "... ..." "header header" "ms ms" "sites sites";
+        font-family: var(--first-font);
+    }
+    .name{
+        font-size: 28px;
+    }
+    .slogan{
+        font-size: 22px;
+    }
+    .ms{
+        font-size: 18px;
+    }
+    .link{
+        font-size: 20px;
+    }
+    .plus{
+        width: 40px;
+    }
+}
+
+.error{
+    color: #e52929;
+    font-size: 32px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
 }
