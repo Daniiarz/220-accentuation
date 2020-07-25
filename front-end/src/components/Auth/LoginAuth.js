@@ -22,7 +22,8 @@ function LoginAuth(prop) {
         setTimeout(() => {
             setDisableLogBtn(false);
         }, 5000)
-        dispatch(sendLoginPost({email: email, password: password}))
+        dispatch(sendLoginPost({email: email, password: password}));
+        dispatch(checkVerifyAuth())
     }
 
     const handleChangeLogin = (e) => dispatch(addLoginData({name: e.target.name, data: e.target.value}));

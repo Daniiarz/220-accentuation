@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
         case "CHECK_VERIFY_FAILED":
             return {
                 ...state,
+                access: false,
                 fail: action.error
             };
         default:

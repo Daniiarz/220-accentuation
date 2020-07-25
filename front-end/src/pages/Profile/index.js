@@ -2,9 +2,9 @@ import React from "react";
 import style from "./profile.module.css";
 import Head from "../../components/MainPage/Header";
 import plus from "../../images/plus-circle-outline.png"
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
-import {checkVerifyAuth, getProfile} from "../../store/actions";
+import {checkVerifyAuth, clearLoginData, getProfile} from "../../store/actions";
 
 function Profile() {
     const dispatch = useDispatch();
@@ -14,9 +14,17 @@ function Profile() {
     React.useEffect(() => {
         dispatch(checkVerifyAuth());
         dispatch(getProfile());
-        if (profileData.sites)setSites(true)
         setSites(false)
     }, [access]);
+    console.log(hasSites, profileData)
+    const history = useHistory();
+    const handleLogOut = (e) => {
+        e.preventDefault();
+        window.localStorage.clear();
+        dispatch(checkVerifyAuth());
+        dispatch(clearLoginData())
+        history.push("/");
+    }
     return (
         <div className={style.mainCont}>
             <Head/>
@@ -31,16 +39,17 @@ function Profile() {
                     </h4>
                 </div>
             </div>
-            <p className={style.ms}>my sites</p>
+            <p className={style.ms}>
+                my sites
+                <button onClick={e=>handleLogOut(e)} className={style.logOut}>log out?</button></p>
             <div className={style.sitesCont}>
-                {
-                    profileData.name
-                        ? hasSites
-                        ? profileData.map( (el, index) => (
+                {profileData.sites
+                        ? profileData.sites.length
+                        ? profileData.sites.map( (el, index) => (
                             <iframe key={index} src={`http://${el.name}.220-accentuation.co`} frameBorder="0">
                             </iframe>))
-                        : <p className={style.error}>unexpected error</p>
                         : <p className={style.error}>you don't have any created sites</p>
+                    :<p className={style.error}>loading ...</p>
                 }
                 <NavLink className={style.link} to={profileData.first_name?"/templates":"/profile"} exact={true}>
                     <img className={style.plus} src={plus} alt=""/>

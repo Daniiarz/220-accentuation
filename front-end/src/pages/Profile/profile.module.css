@@ -1,12 +1,13 @@
-.mainCont{
+.mainCont {
     min-height: 100vh;
     display: grid;
     grid-template: 100px 200px 32px 1fr / 1fr 1fr;
     grid-template-areas: "... ..." "header header" "ms ms" "sites sites";
     font-family: var(--first-font);
+    padding: 0 0 30px 0;
 }
 
-.header{
+.header {
     height: 100%;
     grid-area: header;
     display: flex;
@@ -14,7 +15,7 @@
     padding: 30px 150px;
 }
 
-.name{
+.name {
     width: 50%;
     height: 100%;
     font-size: 48px;
@@ -23,12 +24,12 @@
     justify-content: center;
 }
 
-.name h3{
+.name h3 {
     margin: 0;
 }
 
 
-.slogan{
+.slogan {
     width: 50%;
     height: 100%;
     font-size: 34px;
@@ -36,30 +37,36 @@
     align-items: center;
 }
 
-.slogan h4{
+.slogan h4 {
     text-align: end;
 }
 
-.ms{
+.ms {
     grid-area: ms;
     align-self: center;
     padding: 0 150px;
     margin: 0;
     font-size: 28px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.sitesCont{
+.sitesCont {
     grid-area: sites;
     width: 100%;
     display: grid;
     grid-template: repeat(auto-fit, 1fr) / 1fr;
     grid-row-gap: 20px;
-    padding: 10px 150px 0;
+    padding: 30px 150px 0;
 }
-.sitesCont iframe{
-    max-height: 350px;
+
+.sitesCont iframe {
+    min-height: 350px;
+    min-width: 90%;
+    justify-self: center;
 }
-.link{
+
+.link {
     align-self: center;
     justify-self: center;
     text-decoration: none;
@@ -69,59 +76,95 @@
     color: black;
     font-size: 24px;
 }
-.plus{
+
+.plus {
     width: 60px;
     border-radius: 50%;
     cursor: pointer;
     margin-right: 5px;
 }
-.link:hover .plus{
+
+.link:hover .plus {
     background: var(--second-color);
 }
 
-@media(max-width: 1208px){
-    .header, .sitesCont, .ms{
+.logOut {
+    background: none;
+    outline: none;
+    border: none;
+    color: #8b0000;
+    font-weight: bolder;
+    font-size: 26px;
+    font-family: inherit;
+    padding: 0;
+    display: flex;
+    cursor: pointer;
+}
+
+.logOut:hover {
+    color: #f52222;
+}
+
+@media (max-width: 1208px) {
+    .header, .sitesCont, .ms {
         padding: 0 50px;
     }
 }
-@media(max-width: 1008px){
-    .header, .sitesCont, .ms{
+
+@media (max-width: 1008px) {
+    .header, .sitesCont, .ms {
         padding: 0 10px;
     }
-    .name{
+
+    .name {
         font-size: 32px;
     }
-    .slogan{
+
+    .slogan {
         font-size: 24px;
     }
 
+    .logOut {
+        font-size: 22px;
+    }
+
 }
-@media(max-width: 576px){
-    .mainCont{
+
+@media (max-width: 576px) {
+    .mainCont {
         min-height: 100vh;
         display: grid;
         grid-template: 80px 150px 32px 1fr / 1fr 1fr;
         grid-template-areas: "... ..." "header header" "ms ms" "sites sites";
         font-family: var(--first-font);
     }
-    .name{
+
+    .name {
         font-size: 28px;
     }
-    .slogan{
+
+    .slogan {
         font-size: 22px;
     }
-    .ms{
+
+    .ms {
         font-size: 18px;
     }
-    .link{
+
+    .link {
         font-size: 20px;
     }
-    .plus{
+
+    .plus {
         width: 40px;
+    }
+
+    .logOut {
+        font-size: 16px;
     }
 }
 
-.error{
+.error {
     color: #e52929;
     font-size: 32px;
     display: flex;
