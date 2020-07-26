@@ -5,6 +5,7 @@ import plus from "../../images/plus-circle-outline.png"
 import {NavLink, useHistory} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {checkVerifyAuth, clearLoginData, getProfile} from "../../store/actions";
+import Delete from "../../images/Delete";
 
 function Profile() {
     const dispatch = useDispatch();
@@ -46,8 +47,11 @@ function Profile() {
                 {profileData.sites
                         ? profileData.sites.length
                         ? profileData.sites.map( (el, index) => (
-                            <iframe key={index} src={`http://${el.name}.220-accentuation.co`} frameBorder="0">
-                            </iframe>))
+                            <div className={style.frameCont}>
+                                <iframe key={index} src={`http://${el.name}.220-accentuation.co`} frameBorder="0">
+                                </iframe>
+                                <button className={style.deleteBtn}><Delete/></button>
+                            </div>))
                         : <p className={style.error}>you don't have any created sites</p>
                     :<p className={style.error}>loading ...</p>
                 }
