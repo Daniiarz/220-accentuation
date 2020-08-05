@@ -1,0 +1,90 @@
+upstream api {
+  server backend:8000;
+}
+
+upstream front {
+  server front-end:80;
+}
+
+upstream sites {
+  server sites-nginx:80;
+}
+
+server {
+  listen 80 default_server;
+  return 444;
+}
+
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name  220-accentuation.co www.220-accentuation.co;
+  server_tokens off;
+
+  return 301 https://www.220-accentuation.co$request_uri;
+}
+
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name *.220-accentuation.co;
+  server_tokens off;
+
+  return 301 https://*.220-accentuation.co$request_uri;
+}
+
+server {
+  listen 443 ssl http2 deffered;
+  listen [::]:443 ssl http2 deffered;
+
+  server_name 220-accentuation.co www.220-accentuation.co;
+
+  include ssl_config.nginx;
+
+  location ~ ^/(api|admin) {
+    include proxy_conf.nginx;
+
+    proxy_pass http://api;
+  }
+
+  location /media/ {
+    autoindex off;
+    sendfile on;
+    alias /usr/media/;
+  }
+
+  location /back-static/ {
+    # Nginx won't list all aviable files in that directory
+    autoindex off;
+    sendfile on;
+    alias /usr/static/;
+  }
+
+  location / {
+    include proxy_conf.nginx;
+
+    proxy_pass http://front;
+  }
+}
+
+server {
+  listen 443 ssl http2 deffered;
+  listen [::]:443 ssl http2 deffered;
+
+  server_name *.220-accentuation.co;
+  server_tokens on;
+
+  location / {
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    proxy_buffering off;
+    proxy_redirect off;
+    proxy_pass_request_headers on;
+
+    proxy_pass http://sites;
+  }
+}
