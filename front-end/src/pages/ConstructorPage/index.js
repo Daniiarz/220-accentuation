@@ -27,7 +27,6 @@ function Constructor() {
                 if (!response.ok) throw response;
                 return response.json();
             }).then((templates) => {
-            console.log(templates[0].constructor_link);
             rawTemplates(templates)
         }).catch((err) => {
             if (typeof err.text === 'function') {

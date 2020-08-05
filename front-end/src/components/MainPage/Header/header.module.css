@@ -7,6 +7,7 @@
     justify-content: space-between;
     padding: 0 150px;
     background: rgba(0, 0, 0, 0.76);
+    z-index: 1;
 }
 
 @media(max-width: 1208px){

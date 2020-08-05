@@ -27,6 +27,15 @@ export default function (state = initialState, action) {
                 refresh: null,
                 fail: action.error,
             };
+        case "CLEAR_LOGIN_DATA":
+            return {
+                ...state,
+                email: "",
+                password: "",
+                access: null,
+                refresh: null,
+                fail: ""
+            };
         default:
             return state;
     }
